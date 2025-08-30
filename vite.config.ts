@@ -18,6 +18,7 @@ export default defineConfig({
   resolve: {
     alias: {
       "@": resolve(__dirname, "src"),
+      "@jname/vue-mobile-components": resolve(__dirname, "src/index.ts"),
     },
   },
   build: {

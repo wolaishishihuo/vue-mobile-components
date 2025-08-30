@@ -1,94 +1,145 @@
 <template>
   <div id="app" class="app">
-    <div class="container">
-      <h1>Vue Mobile Components</h1>
-      <p>基于 Vue 3 + Vant 4 的移动端组件库</p>
+    <!-- 导航栏 -->
+    <van-nav-bar
+      :title="
+        currentView === 'list'
+          ? 'Vue Mobile Components'
+          : currentComponent?.name
+      "
+      fixed
+      placeholder
+      :left-arrow="currentView === 'detail'"
+      @click-left="goBack"
+    />
+    <!-- 组件列表 -->
+    <div v-if="currentView === 'list'" class="content">
+      <van-cell-group inset>
+        <van-cell
+          v-for="component in componentList"
+          :key="component.id"
+          :title="component.name"
+          :label="component.desc"
+          :icon="component.icon"
+          is-link
+          @click="showComponent(component)"
+        >
+          <template #right-icon>
+            <van-tag
+              :type="component.status === '已完成' ? 'success' : 'warning'"
+              size="medium"
+            >
+              {{ component.status }}
+            </van-tag>
+          </template>
+        </van-cell>
+      </van-cell-group>
+    </div>
 
-      <div class="status">
-        <h2>当前状态</h2>
-        <ul>
-          <li>✅ 基础项目结构已搭建</li>
-          <li>✅ 构建配置已完成</li>
-          <li>✅ TypeScript 支持已配置</li>
-          <li>✅ 样式系统已配置</li>
-          <li>⏳ 等待添加组件...</li>
-        </ul>
+    <!-- 组件预览 -->
+    <div v-else class="content">
+      <div class="demo-section">
+        <component :is="currentComponent?.demo" v-if="currentComponent?.demo" />
+        <div v-else class="demo-placeholder">
+          <van-empty description="组件开发中..." />
+        </div>
       </div>
 
-      <div class="tips">
-        <h2>下一步</h2>
-        <p>
-          在 <code>src/components</code> 目录下添加您的组件，然后在
-          <code>src/index.ts</code> 中导入和导出。
-        </p>
-      </div>
+      <van-cell-group inset>
+        <van-cell title="描述" :value="currentComponent?.desc" />
+        <van-cell title="状态" :value="currentComponent?.status" />
+      </van-cell-group>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-// 这里可以导入和使用您的组件
+import { ref } from "vue";
+
+// 页面状态管理
+const currentView = ref("list"); // 'list' | 'detail'
+const currentComponent = ref<any>(null);
+
+// 组件列表数据
+const componentList = ref([
+  {
+    id: "button",
+    name: "Button 按钮",
+    desc: "按钮用于开始一个即时操作",
+    icon: "plus",
+    status: "已完成",
+    demo: null,
+  },
+  {
+    id: "input",
+    name: "Input 输入框",
+    desc: "用户可以在文本框内输入或编辑文字",
+    icon: "edit",
+    status: "开发中",
+    demo: null,
+  },
+  {
+    id: "card",
+    name: "Card 卡片",
+    desc: "用于展示信息的卡片容器",
+    icon: "card",
+    status: "开发中",
+    demo: null,
+  },
+  {
+    id: "list",
+    name: "List 列表",
+    desc: "用于展示一系列相关信息的列表",
+    icon: "apps-o",
+    status: "计划中",
+    demo: null,
+  },
+]);
+
+// 导航方法
+const showComponent = (component: any) => {
+  currentComponent.value = component;
+  currentView.value = "detail";
+};
+
+const goBack = () => {
+  currentView.value = "list";
+  currentComponent.value = null;
+};
 </script>
 
 <style scoped>
 .app {
   min-height: 100vh;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: #f7f8fa;
+}
+
+.content {
+  padding: 16px;
+  padding-bottom: 20px;
+  min-height: calc(100vh - 46px);
+}
+
+.van-cell-group {
+  margin-bottom: 16px;
+}
+
+.van-divider {
+  margin: 20px 0 16px 0;
+}
+
+.demo-section {
+  padding: 20px;
+  background: white;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  min-height: 200px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family:
-    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
 
-.container {
-  background: white;
-  padding: 2rem;
-  border-radius: 12px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-  max-width: 600px;
-  margin: 20px;
-}
-
-h1 {
-  color: #333;
+.demo-placeholder {
   text-align: center;
-  margin-bottom: 0.5rem;
-}
-
-h2 {
-  color: #555;
-  border-bottom: 2px solid #667eea;
-  padding-bottom: 0.5rem;
-}
-
-p {
-  color: #666;
-  text-align: center;
-  margin-bottom: 2rem;
-}
-
-.status ul {
-  list-style: none;
-  padding: 0;
-}
-
-.status li {
-  padding: 0.5rem 0;
-  font-size: 1.1rem;
-}
-
-.tips {
-  background: #f8f9fa;
-  padding: 1.5rem;
-  border-radius: 8px;
-  margin-top: 2rem;
-}
-
-code {
-  background: #e9ecef;
-  padding: 0.2rem 0.4rem;
-  border-radius: 4px;
-  font-family: "Courier New", monospace;
 }
 </style>
