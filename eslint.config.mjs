@@ -1,11 +1,20 @@
 import js from '@eslint/js'
-import vue from 'eslint-plugin-vue'
 import typescript from '@typescript-eslint/eslint-plugin'
 import typescriptParser from '@typescript-eslint/parser'
+import vue from 'eslint-plugin-vue'
 
 export default [
   js.configs.recommended,
   ...vue.configs['flat/recommended'],
+  {
+    ignores: [
+      'lib/**',
+      'dist/**',
+      'node_modules/**',
+      '*.d.ts',
+      'pnpm-lock.yaml'
+    ]
+  },
   {
     files: ['**/*.{js,ts}'],
     languageOptions: {
@@ -28,7 +37,10 @@ export default [
     },
     rules: {
       '@typescript-eslint/no-explicit-any': 'off',
-      '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
+      '@typescript-eslint/no-unused-vars': [
+        'error',
+        { argsIgnorePattern: '^_' }
+      ],
       'no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
       'no-console': 'off',
       'no-debugger': 'off'

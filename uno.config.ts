@@ -1,4 +1,6 @@
+import presetRemToPx from '@unocss/preset-rem-to-px'
 import { defineConfig } from 'unocss'
+
 import {
   presetAttributify,
   presetIcons,
@@ -32,6 +34,9 @@ export default defineConfig({
   presets: [
     presetUno(),
     presetAttributify(),
+    presetRemToPx({
+      baseFontSize: 4
+    }),
     presetIcons({
       scale: 1.2,
       warn: true
