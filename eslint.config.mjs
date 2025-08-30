@@ -55,5 +55,22 @@ export default [
       'no-console': 'off',
       'no-debugger': 'off'
     }
+  },
+  {
+    files: ['**/*.cjs'],
+    languageOptions: {
+      globals: {
+        module: 'writable',
+        exports: 'writable',
+        require: 'readonly',
+        __dirname: 'readonly',
+        __filename: 'readonly',
+        process: 'readonly'
+      },
+      sourceType: 'commonjs'
+    },
+    rules: {
+      'no-console': 'off'
+    }
   }
 ]
