@@ -1,0 +1,82 @@
+{
+  "name": "@jname/vue-mobile-components",
+  "version": "1.0.0",
+  "description": "基于 Vue 3 + Vant 4 的移动端组件库",
+  "keywords": [
+    "vue3",
+    "mobile",
+    "components",
+    "vant",
+    "typescript"
+  ],
+  "author": "Jname",
+  "main": "./lib/index.umd.js",
+  "module": "./lib/index.es.js",
+  "types": "./lib/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./lib/index.es.js",
+      "require": "./lib/index.umd.js",
+      "types": "./lib/index.d.ts"
+    },
+    "./lib/style.css": "./lib/style.css"
+  },
+  "files": [
+    "lib",
+    "README.md"
+  ],
+  "scripts": {
+    "dev": "vite",
+    "build": "vue-tsc --noEmit && vite build",
+    "build:watch": "vite build --watch",
+    "preview": "vite preview",
+    "typecheck": "vue-tsc --noEmit",
+    "lint": "eslint src --ext .vue,.js,.ts",
+    "lint:fix": "eslint src --ext .vue,.js,.ts --fix",
+    "format": "prettier --write src/**/*.{js,ts,vue}",
+    "prepare": "husky install",
+    "prepublishOnly": "pnpm build"
+  },
+  "peerDependencies": {
+    "@vueuse/core": "^10.0.0",
+    "vant": "^4.0.0",
+    "vue": "^3.3.0"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^19.3.0",
+    "@commitlint/config-conventional": "^19.2.2",
+    "@eslint/js": "^9.34.0",
+    "@types/node": "^20.14.9",
+    "@typescript-eslint/eslint-plugin": "^8.41.0",
+    "@typescript-eslint/parser": "^8.41.0",
+    "@vitejs/plugin-vue": "^5.0.5",
+    "@vitejs/plugin-vue-jsx": "^4.0.0",
+    "@vue/tsconfig": "^0.5.1",
+    "eslint": "^9.5.0",
+    "eslint-plugin-vue": "^10.4.0",
+    "husky": "^9.0.11",
+    "less": "^4.4.1",
+    "lint-staged": "^15.2.7",
+    "prettier": "^3.3.2",
+    "terser": "^5.43.1",
+    "typescript": "^5.5.2",
+    "unocss": "^0.61.0",
+    "vite": "^5.3.1",
+    "vite-plugin-dts": "^3.9.1",
+    "vue-tsc": "^2.0.21"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jname/vue-mobile-components.git"
+  },
+  "license": "MIT",
+  "lint-staged": {
+    "*.{js,ts,vue}": [
+      "eslint --fix",
+      "prettier --write"
+    ]
+  }
+}

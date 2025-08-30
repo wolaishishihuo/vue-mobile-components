@@ -1,0 +1,54 @@
+// 全局样式定义
+
+// 组件库前缀
+.vm {
+  // 重置样式
+  box-sizing: border-box;
+  
+  &,
+  &::before,
+  &::after {
+    box-sizing: inherit;
+  }
+}
+
+// 工具类
+.vm-text-center {
+  text-align: center;
+}
+
+.vm-text-left {
+  text-align: left;
+}
+
+.vm-text-right {
+  text-align: right;
+}
+
+.vm-flex {
+  display: flex;
+}
+
+.vm-flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.vm-flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+// 边距工具类
+.vm-mb-xs { margin-bottom: var(--vm-spacing-xs); }
+.vm-mb-sm { margin-bottom: var(--vm-spacing-sm); }
+.vm-mb-md { margin-bottom: var(--vm-spacing-md); }
+.vm-mb-lg { margin-bottom: var(--vm-spacing-lg); }
+.vm-mb-xl { margin-bottom: var(--vm-spacing-xl); }
+
+.vm-mt-xs { margin-top: var(--vm-spacing-xs); }
+.vm-mt-sm { margin-top: var(--vm-spacing-sm); }
+.vm-mt-md { margin-top: var(--vm-spacing-md); }
+.vm-mt-lg { margin-top: var(--vm-spacing-lg); }
+.vm-mt-xl { margin-top: var(--vm-spacing-xl); }
