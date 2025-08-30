@@ -8,13 +8,13 @@
  */
 export function debounce<T extends (..._args: any[]) => any>(
   fn: T,
-  delay: number
+  delay: number,
 ): (..._args: Parameters<T>) => void {
-  let timeoutId: ReturnType<typeof setTimeout>
+  let timeoutId: ReturnType<typeof setTimeout>;
   return (..._args: Parameters<T>) => {
-    clearTimeout(timeoutId)
-    timeoutId = setTimeout(() => fn(..._args), delay)
-  }
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => fn(..._args), delay);
+  };
 }
 
 /**
@@ -25,16 +25,16 @@ export function debounce<T extends (..._args: any[]) => any>(
  */
 export function throttle<T extends (..._args: any[]) => any>(
   fn: T,
-  delay: number
+  delay: number,
 ): (..._args: Parameters<T>) => void {
-  let lastTime = 0
+  let lastTime = 0;
   return (..._args: Parameters<T>) => {
-    const now = Date.now()
+    const now = Date.now();
     if (now - lastTime >= delay) {
-      lastTime = now
-      fn(..._args)
+      lastTime = now;
+      fn(..._args);
     }
-  }
+  };
 }
 
 /**
@@ -43,29 +43,29 @@ export function throttle<T extends (..._args: any[]) => any>(
  * @returns 克隆后的对象
  */
 export function deepClone<T>(obj: T): T {
-  if (obj === null || typeof obj !== 'object') {
-    return obj
+  if (obj === null || typeof obj !== "object") {
+    return obj;
   }
 
   if (obj instanceof Date) {
-    return new Date(obj.getTime()) as unknown as T
+    return new Date(obj.getTime()) as unknown as T;
   }
 
-  if (obj instanceof Array) {
-    return obj.map(item => deepClone(item)) as unknown as T
+  if (Array.isArray(obj)) {
+    return obj.map((item) => deepClone(item)) as unknown as T;
   }
 
-  if (typeof obj === 'object') {
-    const cloned = {} as T
+  if (typeof obj === "object") {
+    const cloned = {} as T;
     for (const key in obj) {
       if (Object.prototype.hasOwnProperty.call(obj, key)) {
-        cloned[key] = deepClone(obj[key])
+        cloned[key] = deepClone(obj[key]);
       }
     }
-    return cloned
+    return cloned;
   }
 
-  return obj
+  return obj;
 }
 
 /**
@@ -74,13 +74,13 @@ export function deepClone<T>(obj: T): T {
  * @returns 格式化后的文件大小
  */
 export function formatFileSize(bytes: number): string {
-  if (bytes === 0) return '0 B'
+  if (bytes === 0) return "0 B";
 
-  const k = 1024
-  const sizes = ['B', 'KB', 'MB', 'GB']
-  const i = Math.floor(Math.log(bytes) / Math.log(k))
+  const k = 1024;
+  const sizes = ["B", "KB", "MB", "GB"];
+  const i = Math.floor(Math.log(bytes) / Math.log(k));
 
-  return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i]
+  return `${Number.parseFloat((bytes / k ** i).toFixed(2))} ${sizes[i]}`;
 }
 
 /**
@@ -88,7 +88,7 @@ export function formatFileSize(bytes: number): string {
  * @returns 唯一ID字符串
  */
 export function generateId(): string {
-  return Math.random().toString(36).substr(2, 9)
+  return Math.random().toString(36).substr(2, 9);
 }
 
 /**
@@ -97,11 +97,11 @@ export function generateId(): string {
  * @returns 是否为空
  */
 export function isEmpty(value: any): boolean {
-  if (value === null || value === undefined) return true
-  if (typeof value === 'string') return value.trim() === ''
-  if (Array.isArray(value)) return value.length === 0
-  if (typeof value === 'object') return Object.keys(value).length === 0
-  return false
+  if (value === null || value === undefined) return true;
+  if (typeof value === "string") return value.trim() === "";
+  if (Array.isArray(value)) return value.length === 0;
+  if (typeof value === "object") return Object.keys(value).length === 0;
+  return false;
 }
 
 /**
@@ -110,7 +110,7 @@ export function isEmpty(value: any): boolean {
  * @returns 文件扩展名
  */
 export function getFileExtension(filename: string): string {
-  return filename.slice(((filename.lastIndexOf('.') - 1) >>> 0) + 2)
+  return filename.slice(((filename.lastIndexOf(".") - 1) >>> 0) + 2);
 }
 
 /**
@@ -119,8 +119,8 @@ export function getFileExtension(filename: string): string {
  * @returns 是否有效
  */
 export function isValidPhone(phone: string): boolean {
-  const phoneRegex = /^1[3-9]\d{9}$/
-  return phoneRegex.test(phone)
+  const phoneRegex = /^1[3-9]\d{9}$/;
+  return phoneRegex.test(phone);
 }
 
 /**
@@ -129,6 +129,6 @@ export function isValidPhone(phone: string): boolean {
  * @returns 是否有效
  */
 export function isValidEmail(email: string): boolean {
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-  return emailRegex.test(email)
+  const emailRegex = /^[^\s@]+@[^\s@][^\s.@]*\.[^\s@]+$/;
+  return emailRegex.test(email);
 }

@@ -1,33 +1,33 @@
-import type { App } from 'vue'
+import type { App } from "vue";
 
 // 导入样式
-import './styles/index.less'
+import "./styles/index.less";
 
 // 导出类型
-export * from './types'
+export * from "./types";
 
 // 导出工具函数
-export * from './utils'
+export * from "./utils";
 
 // 组件列表 (暂时为空，后续添加组件时在这里导入)
-const components: any[] = []
+const components: any[] = [];
 
 // 定义安装函数
 const install = (app: App) => {
-  components.forEach(component => {
+  components.forEach((component) => {
     if (component.name) {
-      app.component(component.name, component)
+      app.component(component.name, component);
     }
-  })
-}
+  });
+};
 
 // 默认导出
 export default {
   install,
-  version: '1.0.0'
-}
+  version: "1.0.0",
+};
 
 // 支持通过 CDN 使用
-if (typeof window !== 'undefined' && (window as any).Vue) {
-  install((window as any).Vue)
+if (typeof window !== "undefined" && (window as any).Vue) {
+  install((window as any).Vue);
 }

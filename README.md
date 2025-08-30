@@ -29,21 +29,21 @@ pnpm add @jname/vue-mobile-components
 ### 全局引入
 
 ```typescript
-import { createApp } from 'vue'
-import VueMobileComponents from '@jname/vue-mobile-components'
-import '@jname/vue-mobile-components/lib/style.css'
-import App from './App.vue'
+import VueMobileComponents from '@jname/vue-mobile-components';
+import { createApp } from 'vue';
+import App from './App.vue';
+import '@jname/vue-mobile-components/lib/style.css';
 
-const app = createApp(App)
-app.use(VueMobileComponents)
-app.mount('#app')
+const app = createApp(App);
+app.use(VueMobileComponents);
+app.mount('#app');
 ```
 
 ### 按需引入
 
 ```typescript
-import { ComponentName } from '@jname/vue-mobile-components'
-import '@jname/vue-mobile-components/lib/style.css'
+import { ComponentName } from '@jname/vue-mobile-components';
+import '@jname/vue-mobile-components/lib/style.css';
 ```
 
 ## 开发

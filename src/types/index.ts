@@ -5,50 +5,50 @@
 
 // 公共类型定义
 export interface ComponentOptions {
-  size?: 'small' | 'medium' | 'large'
-  disabled?: boolean
-  loading?: boolean
+  size?: "small" | "medium" | "large";
+  disabled?: boolean;
+  loading?: boolean;
 }
 
 export interface BaseProps {
-  id?: string
-  className?: string
-  style?: Record<string, any>
+  id?: string;
+  className?: string;
+  style?: Record<string, any>;
 }
 
 // 主题类型
 export interface ThemeConfig {
-  primaryColor?: string
-  successColor?: string
-  warningColor?: string
-  errorColor?: string
-  infoColor?: string
+  primaryColor?: string;
+  successColor?: string;
+  warningColor?: string;
+  errorColor?: string;
+  infoColor?: string;
 }
 
 // 上传组件类型
 export interface UploadFile {
-  id: string
-  name: string
-  url?: string
-  status: 'pending' | 'uploading' | 'success' | 'error'
-  percent?: number
+  id: string;
+  name: string;
+  url?: string;
+  status: "pending" | "uploading" | "success" | "error";
+  percent?: number;
 }
 
 // 列表刷新组件类型
 export interface RefreshListConfig {
-  enablePullRefresh?: boolean
-  enableLoadMore?: boolean
-  finishedText?: string
-  loadingText?: string
-  errorText?: string
+  enablePullRefresh?: boolean;
+  enableLoadMore?: boolean;
+  finishedText?: string;
+  loadingText?: string;
+  errorText?: string;
 }
 
 // 表格树组件类型
 export interface TreeNode {
-  id: string | number
-  label: string
-  children?: TreeNode[]
-  disabled?: boolean
-  level?: number
-  expanded?: boolean
+  id: string | number;
+  label: string;
+  children?: TreeNode[];
+  disabled?: boolean;
+  level?: number;
+  expanded?: boolean;
 }

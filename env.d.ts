@@ -1,18 +1,12 @@
 /// <reference types="vite/client" />
-/// <reference types="node" />
 
-declare module '*.vue' {
-  import type { DefineComponent } from 'vue'
+declare module "*.vue" {
+  import type { DefineComponent } from "vue";
 
-  const component: DefineComponent<{}, {}, any>
-  export default component
-}
-
-declare module '@/*'
-
-// 扩展 Window 接口
-declare global {
-  interface Window {
-    Vue?: any
-  }
+  const component: DefineComponent<
+    Record<string, never>,
+    Record<string, never>,
+    any
+  >;
+  export default component;
 }

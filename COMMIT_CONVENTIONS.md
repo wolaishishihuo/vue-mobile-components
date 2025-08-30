@@ -48,6 +48,7 @@
 ## 示例
 
 ### 新功能
+
 ```
 feat(components): 添加Search搜索组件
 
@@ -59,6 +60,7 @@ Closes #123
 ```
 
 ### 修复Bug
+
 ```
 fix(utils): 修复debounce函数类型定义错误
 
@@ -66,6 +68,7 @@ fix(utils): 修复debounce函数类型定义错误
 ```
 
 ### 文档更新
+
 ```
 docs: 更新README安装说明
 
@@ -73,6 +76,7 @@ docs: 更新README安装说明
 ```
 
 ### 样式调整
+
 ```
 style: 统一代码缩进格式
 
@@ -80,6 +84,7 @@ style: 统一代码缩进格式
 ```
 
 ### 重构
+
 ```
 refactor(build): 优化vite构建配置
 
