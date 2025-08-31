@@ -10,12 +10,7 @@ export default defineConfig({
     vueJsx(),
     dts({
       insertTypesEntry: true,
-      include: [
-        'src/index.ts',
-        'src/**/*',
-        'src/types/**/*',
-        'src/utils/**/*'
-      ],
+      include: ['src/**/*'],
       exclude: [
         'src/**/*.stories.*',
         'src/**/*.test.*',

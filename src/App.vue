@@ -55,7 +55,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import ButtonDemo from './components/base/Button/demo.vue';
+import ButtonDemo from './button/demo/index.vue';
 
 // 页面状态管理
 const currentView = ref('list'); // 'list' | 'detail'
