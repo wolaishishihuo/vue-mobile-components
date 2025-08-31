@@ -17,19 +17,19 @@
 </template>
 
 <script setup lang="ts">
-import { Loading as VanLoading } from "vant";
-import { computed } from "vue";
+import { Loading as VanLoading } from 'vant';
+import { computed } from 'vue';
 
 export interface ButtonProps {
   /**
    * 按钮类型
    */
-  type?: "default" | "primary" | "success" | "warning" | "danger";
+  type?: 'default' | 'primary' | 'success' | 'warning' | 'danger';
 
   /**
    * 按钮尺寸
    */
-  size?: "small" | "medium" | "large";
+  size?: 'small' | 'medium' | 'large';
 
   /**
    * 按钮文字
@@ -67,37 +67,37 @@ export interface ButtonEmits {
 }
 
 defineOptions({
-  name: "VmButton",
+  name: 'VmButton'
 });
 
 const props = withDefaults(defineProps<ButtonProps>(), {
-  type: "default",
-  size: "medium",
+  type: 'default',
+  size: 'medium',
   disabled: false,
   loading: false,
   block: false,
   round: false,
-  plain: false,
+  plain: false
 });
 
 const emit = defineEmits<ButtonEmits>();
 
 const buttonClasses = computed(() => [
-  "vm-button",
+  'vm-button',
   `vm-button--${props.type}`,
   `vm-button--${props.size}`,
   {
-    "vm-button--disabled": props.disabled,
-    "vm-button--loading": props.loading,
-    "vm-button--block": props.block,
-    "vm-button--round": props.round,
-    "vm-button--plain": props.plain,
-  },
+    'vm-button--disabled': props.disabled,
+    'vm-button--loading': props.loading,
+    'vm-button--block': props.block,
+    'vm-button--round': props.round,
+    'vm-button--plain': props.plain
+  }
 ]);
 
 const handleClick = (event: MouseEvent) => {
   if (props.disabled || props.loading) return;
-  emit("click", event);
+  emit('click', event);
 };
 </script>
 

@@ -5,7 +5,7 @@
 
 // 公共类型定义
 export interface ComponentOptions {
-  size?: "small" | "medium" | "large";
+  size?: 'small' | 'medium' | 'large';
   disabled?: boolean;
   loading?: boolean;
 }
@@ -30,7 +30,7 @@ export interface UploadFile {
   id: string;
   name: string;
   url?: string;
-  status: "pending" | "uploading" | "success" | "error";
+  status: 'pending' | 'uploading' | 'success' | 'error';
   percent?: number;
 }
 

@@ -8,7 +8,7 @@
  */
 export function debounce<T extends (..._args: any[]) => any>(
   fn: T,
-  delay: number,
+  delay: number
 ): (..._args: Parameters<T>) => void {
   let timeoutId: ReturnType<typeof setTimeout>;
   return (..._args: Parameters<T>) => {
@@ -25,7 +25,7 @@ export function debounce<T extends (..._args: any[]) => any>(
  */
 export function throttle<T extends (..._args: any[]) => any>(
   fn: T,
-  delay: number,
+  delay: number
 ): (..._args: Parameters<T>) => void {
   let lastTime = 0;
   return (..._args: Parameters<T>) => {
@@ -43,7 +43,7 @@ export function throttle<T extends (..._args: any[]) => any>(
  * @returns 克隆后的对象
  */
 export function deepClone<T>(obj: T): T {
-  if (obj === null || typeof obj !== "object") {
+  if (obj === null || typeof obj !== 'object') {
     return obj;
   }
 
@@ -52,10 +52,10 @@ export function deepClone<T>(obj: T): T {
   }
 
   if (Array.isArray(obj)) {
-    return obj.map((item) => deepClone(item)) as unknown as T;
+    return obj.map(item => deepClone(item)) as unknown as T;
   }
 
-  if (typeof obj === "object") {
+  if (typeof obj === 'object') {
     const cloned = {} as T;
     for (const key in obj) {
       if (Object.prototype.hasOwnProperty.call(obj, key)) {
@@ -74,10 +74,10 @@ export function deepClone<T>(obj: T): T {
  * @returns 格式化后的文件大小
  */
 export function formatFileSize(bytes: number): string {
-  if (bytes === 0) return "0 B";
+  if (bytes === 0) return '0 B';
 
   const k = 1024;
-  const sizes = ["B", "KB", "MB", "GB"];
+  const sizes = ['B', 'KB', 'MB', 'GB'];
   const i = Math.floor(Math.log(bytes) / Math.log(k));
 
   return `${Number.parseFloat((bytes / k ** i).toFixed(2))} ${sizes[i]}`;
@@ -98,9 +98,9 @@ export function generateId(): string {
  */
 export function isEmpty(value: any): boolean {
   if (value === null || value === undefined) return true;
-  if (typeof value === "string") return value.trim() === "";
+  if (typeof value === 'string') return value.trim() === '';
   if (Array.isArray(value)) return value.length === 0;
-  if (typeof value === "object") return Object.keys(value).length === 0;
+  if (typeof value === 'object') return Object.keys(value).length === 0;
   return false;
 }
 
@@ -110,7 +110,7 @@ export function isEmpty(value: any): boolean {
  * @returns 文件扩展名
  */
 export function getFileExtension(filename: string): string {
-  return filename.slice(((filename.lastIndexOf(".") - 1) >>> 0) + 2);
+  return filename.slice(((filename.lastIndexOf('.') - 1) >>> 0) + 2);
 }
 
 /**
