@@ -55,6 +55,7 @@
 
 <script setup lang="ts">
 import { ref } from "vue";
+import ButtonDemo from "./components/base/Button/demo.vue";
 
 // 页面状态管理
 const currentView = ref("list"); // 'list' | 'detail'
@@ -68,7 +69,7 @@ const componentList = ref([
     desc: "按钮用于开始一个即时操作",
     icon: "plus",
     status: "已完成",
-    demo: null,
+    demo: ButtonDemo,
   },
   {
     id: "input",

@@ -1,5 +1,8 @@
 import type { App } from "vue";
 
+// 导入组件
+import Button from "./components/base/Button";
+
 // 导入样式
 import "./styles/index.less";
 
@@ -9,8 +12,11 @@ export * from "./types";
 // 导出工具函数
 export * from "./utils";
 
-// 组件列表 (暂时为空，后续添加组件时在这里导入)
-const components: any[] = [];
+// 导出组件
+export { Button };
+
+// 组件列表
+const components = [Button];
 
 // 定义安装函数
 const install = (app: App) => {

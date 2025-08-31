@@ -42,7 +42,15 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "prepare": "husky install",
-    "prepublishOnly": "pnpm build"
+    "prepublishOnly": "pnpm build",
+    "version:patch": "npm version patch",
+    "version:minor": "npm version minor",
+    "version:major": "npm version major",
+    "release": "pnpm build && npm publish",
+    "release:patch": "pnpm version:patch && pnpm release",
+    "release:minor": "pnpm version:minor && pnpm release",
+    "release:major": "pnpm version:major && pnpm release",
+    "prepublish": "pnpm lint && pnpm typecheck && pnpm build"
   },
   "peerDependencies": {
     "@vueuse/core": "^10.0.0",

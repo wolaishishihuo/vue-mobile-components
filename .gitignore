@@ -1,3 +1,27 @@
+# Dependencies
+node_modules/
+.pnpm-store/
+
+# Build outputs
+dist/
+lib/
+*.tsbuildinfo
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
 # Logs
 logs
 *.log
@@ -7,49 +31,28 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-node_modules
-dist
-lib
-*.local
+# Coverage
+coverage/
+*.lcov
 
-# Editor directories and files
-.vscode/*
-!.vscode/extensions.json
-.idea
-.DS_Store
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.sw?
+# Temporary
+.tmp/
+temp/
 
-# TypeScript
-*.tsbuildinfo
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
 
-# Build output
-dist-ssr
-*.tgz
+# Optional npm cache directory
+.npm
 
-# Testing
-coverage
+# Optional eslint cache
+.eslintcache
 
-# Environment variables
-.env
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
+# Local config
+.npmrc.local
 
-# Temporary files
-*.tmp
-*.temp
-
-# Package files
-*.tgz
-*.tar.gz
-
-# IDE
-.vscode/
-.idea/
-*.swp
-*.swo
+# Husky
+.husky/_/

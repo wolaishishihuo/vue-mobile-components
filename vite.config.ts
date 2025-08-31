@@ -10,8 +10,18 @@ export default defineConfig({
     vueJsx(),
     dts({
       insertTypesEntry: true,
-      include: ["src/**/*"],
-      exclude: ["src/**/*.stories.*", "src/**/*.test.*"],
+      include: [
+        "src/index.ts",
+        "src/components/**/*",
+        "src/types/**/*",
+        "src/utils/**/*",
+      ],
+      exclude: [
+        "src/**/*.stories.*",
+        "src/**/*.test.*",
+        "src/App.vue",
+        "src/main.ts",
+      ],
       outDir: "lib",
     }),
   ],
