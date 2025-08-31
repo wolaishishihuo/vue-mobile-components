@@ -12,7 +12,7 @@ export default defineConfig({
       insertTypesEntry: true,
       include: [
         'src/index.ts',
-        'src/components/**/*',
+        'src/**/*',
         'src/types/**/*',
         'src/utils/**/*'
       ],

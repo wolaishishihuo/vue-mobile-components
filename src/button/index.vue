@@ -8,9 +8,9 @@
       v-if="loading"
       size="14px"
       color="currentColor"
-      class="vm-button__loading"
+      class="j-button__loading"
     />
-    <span v-if="!loading" class="vm-button__text">
+    <span v-if="!loading" class="j-button__text">
       <slot>{{ text }}</slot>
     </span>
   </button>
@@ -67,7 +67,7 @@ export interface ButtonEmits {
 }
 
 defineOptions({
-  name: 'VmButton'
+  name: 'JButton'
 });
 
 const props = withDefaults(defineProps<ButtonProps>(), {
@@ -83,15 +83,15 @@ const props = withDefaults(defineProps<ButtonProps>(), {
 const emit = defineEmits<ButtonEmits>();
 
 const buttonClasses = computed(() => [
-  'vm-button',
-  `vm-button--${props.type}`,
-  `vm-button--${props.size}`,
+  'j-button',
+  `j-button--${props.type}`,
+  `j-button--${props.size}`,
   {
-    'vm-button--disabled': props.disabled,
-    'vm-button--loading': props.loading,
-    'vm-button--block': props.block,
-    'vm-button--round': props.round,
-    'vm-button--plain': props.plain
+    'j-button--disabled': props.disabled,
+    'j-button--loading': props.loading,
+    'j-button--block': props.block,
+    'j-button--round': props.round,
+    'j-button--plain': props.plain
   }
 ]);
 
@@ -102,7 +102,7 @@ const handleClick = (event: MouseEvent) => {
 </script>
 
 <style lang="less" scoped>
-.vm-button {
+.j-button {
   position: relative;
   display: inline-flex;
   align-items: center;
@@ -225,22 +225,22 @@ const handleClick = (event: MouseEvent) => {
   &--plain {
     background: #fff;
 
-    &.vm-button--primary {
+    &.j-button--primary {
       color: #1989fa;
       border-color: #1989fa;
     }
 
-    &.vm-button--success {
+    &.j-button--success {
       color: #07c160;
       border-color: #07c160;
     }
 
-    &.vm-button--danger {
+    &.j-button--danger {
       color: #ee0a24;
       border-color: #ee0a24;
     }
 
-    &.vm-button--warning {
+    &.j-button--warning {
       color: #ff976a;
       border-color: #ff976a;
     }

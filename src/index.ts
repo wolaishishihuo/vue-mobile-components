@@ -1,7 +1,7 @@
 import type { App } from 'vue';
 
 // 导入组件
-import Button from './components/base/Button';
+import JButton from './button';
 
 // 导入样式
 import './styles/index.less';
@@ -13,10 +13,10 @@ export * from './types';
 export * from './utils';
 
 // 导出组件
-export { Button };
+export { JButton };
 
 // 组件列表
-const components = [Button];
+const components = [JButton];
 
 // 定义安装函数
 const install = (app: App) => {
