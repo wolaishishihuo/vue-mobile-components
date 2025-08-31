@@ -1,6 +1,6 @@
 {
   "name": "@jname/vue-mobile-components",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "基于 Vue 3 + Vant 4 的移动端组件库",
   "author": "Jname",
   "license": "MIT",
