@@ -2,6 +2,7 @@ import type { App } from 'vue';
 
 // 导入组件
 import JButton from './button';
+import JStepsCard from './stepsCard';
 
 // 导入样式
 import './styles/index.less';
@@ -13,10 +14,10 @@ export * from './types';
 export * from './utils';
 
 // 导出组件
-export { JButton };
+export { JButton, JStepsCard };
 
 // 组件列表
-const components = [JButton];
+const components = [JButton, JStepsCard];
 
 // 定义安装函数
 const install = (app: App) => {
