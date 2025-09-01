@@ -26,6 +26,10 @@ export default defineConfig({
       '@jname/vue-mobile-components': resolve(__dirname, 'src/index.ts')
     }
   },
+  server: {
+    port: 3000,
+    open: true
+  },
   build: {
     outDir: 'lib',
     lib: {
