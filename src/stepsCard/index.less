@@ -1,0 +1,70 @@
+.steps-card {
+  display: flex;
+  margin-bottom: 10px;
+  padding-bottom: 30px;
+
+  &__timeline {
+    position: relative;
+    width: 30px;
+    display: flex;
+    justify-content: center;
+
+    &-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+
+  &__dot-container {
+    position: relative;
+  }
+
+  &__outer-dot {
+    height: 21px;
+    width: 21px;
+    border-radius: 50%;
+    background-color: #4873C1;
+    opacity: 0.23;
+  }
+
+  &__inner-dot {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    height: 8px;
+    width: 8px;
+    transform: translateX(-50%) translateY(-50%);
+    border-radius: 50%;
+    background-color: #4873C1;
+  }
+
+  &__line {
+    margin-top: 0;
+    width: 1px;
+    border-left: 1px dashed #4873C1;
+
+    &--visible {
+      height: 100%;
+    }
+
+    &--hidden {
+      height: 0;
+    }
+  }
+
+  &__content {
+    margin-left: 34px;
+    flex: 1;
+
+    &-header {
+      display: flex;
+      align-items: center;
+    }
+
+    &-body {
+      margin-top: 15px;
+      padding-left: 5px;
+    }
+  }
+}

@@ -56,6 +56,7 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import ButtonDemo from './button/demo/index.vue';
+import StepsCardDemo from './stepsCard/demo/index.vue';
 
 // 页面状态管理
 const currentView = ref('list'); // 'list' | 'detail'
@@ -70,6 +71,14 @@ const componentList = ref([
     icon: 'plus',
     status: '已完成',
     demo: ButtonDemo
+  },
+  {
+    id: 'stepsCard',
+    name: 'StepsCard 步骤卡片',
+    desc: '用于展示步骤流程或时间轴信息',
+    icon: 'todo-list-o',
+    status: '已完成',
+    demo: StepsCardDemo
   },
   {
     id: 'input',
