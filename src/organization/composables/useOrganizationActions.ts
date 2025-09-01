@@ -1,109 +1,96 @@
 import type { Ref } from 'vue';
 import type { PersonnelItem } from '../types';
-import type { RouteState } from './useOrganizationRouteParams';
-import type RefreshList from '@/pullToRefreshList/index.vue';
 import { showToast } from 'vant';
-import { computed } from 'vue';
-import { useRouter } from 'vue-router';
+import { computed, ref } from 'vue';
 
 const useOrganizationActions = ({
-  routeState,
+  multiple = true,
+  maxSelected = 10,
   organizationCatch,
-  refreshListRef,
-  searchState
+  searchState,
+  onOrgClick,
+  onRefresh
 }: {
-  routeState: RouteState;
+  multiple?: boolean;
+  maxSelected?: number;
   organizationCatch: Ref<Map<string, true>>;
-  refreshListRef: Ref<InstanceType<typeof RefreshList>>;
   searchState: Ref<{
     xm: string;
     dwh: string;
   }>;
+  onOrgClick?: (item: PersonnelItem) => void;
+  onRefresh?: () => void;
 }) => {
-  const router = useRouter();
-  // 数据源
-  const dataSource = computed(() => refreshListRef.value?.dataSource);
+  // 选择状态
+  const selectedItems = ref<PersonnelItem[]>([]);
 
   // 已选择人数
-  const selectedCount = computed(() => {
-    if (!dataSource.value) return 0;
-    return dataSource.value.filter((item: PersonnelItem) => item.checked).length || 0;
-  });
+  const selectedCount = computed(() => selectedItems.value.length);
 
-  // 已选择人员
-  const selectedItems = computed(() => {
-    if (!dataSource.value) return [];
-    return dataSource.value.filter((item: PersonnelItem) => !item.isParent && item.checked);
-  });
+  // 处理人员点击选择
+  const handlePersonClick = (item: PersonnelItem) => {
+    if (isPersonDisabled(item)) return;
 
-  // 处理下拉刷新事件
-  const handleRefreshChange = ({ status, distance }: { status: string; distance: number }) => {
-    if (status === 'pulling' && distance !== 100) {
-      organizationCatch.value.clear();
+    const isSelected = selectedItems.value.some(selected => selected.id === item.id);
+
+    if (isSelected) {
+      // 取消选择
+      selectedItems.value = selectedItems.value.filter(selected => selected.id !== item.id);
+    } else {
+      // 选择人员
+      if (multiple) {
+        if (selectedItems.value.length >= maxSelected) {
+          showToast(`最多选择${maxSelected}人`);
+          return;
+        }
+        selectedItems.value.push({ ...item, checked: true });
+      } else {
+        selectedItems.value = [{ ...item, checked: true }];
+      }
     }
+
+    // 这里不需要同步，由外部组件处理
   };
 
-  // 处理复选框变更事件
-  const handleCheckChange = (item: PersonnelItem) => {
-    const currentId = item.id;
-
-    // 单选
-    if (!routeState.multiple && item.checked) {
-      dataSource.value.forEach((dataItem: PersonnelItem) => {
-        if (dataItem.id !== currentId) {
-          dataItem.checked = false;
-        }
-      });
+  // 判断人员是否禁用
+  const isPersonDisabled = (person: PersonnelItem) => {
+    if (!multiple && selectedItems.value.length > 0) {
+      return !selectedItems.value.some(item => item.id === person.id);
     }
-
-    // 检查是否超过最大选择数量
-    if (routeState.maxSelected && selectedCount.value > routeState.maxSelected && item.checked) {
-      item.checked = false;
-      showToast('最多选择10人');
+    if (selectedItems.value.length >= maxSelected) {
+      return !selectedItems.value.some(item => item.id === person.id);
     }
+    return false;
   };
 
   // 处理组织架构项点击事件
-  const handleCellClick = (item: PersonnelItem) => {
+  const handleOrgClick = (item: PersonnelItem) => {
     if (!item.isParent) return;
-
-    const { path, depth, customMap, dwh, ...rest } = routeState;
-    router.push({
-      path: routeState.path,
-      query: {
-        dwh: item.dwh,
-        depth: (depth + 1).toString(),
-        customMap: JSON.stringify(customMap),
-        ...rest
-      }
-    });
+    onOrgClick?.(item);
   };
 
-  const handleSearch = () => {
+  const handleSearch = (keyword?: string) => {
+    if (keyword !== undefined) {
+      searchState.value.xm = keyword;
+    }
     if (!searchState.value.xm) {
       organizationCatch.value.clear();
     }
-    refreshListRef.value?.onSearch({
-      xm: searchState.value.xm
-    });
+    onRefresh?.();
   };
 
   const handleClear = () => {
-    if (!dataSource.value) return;
-
-    dataSource.value.forEach((item: PersonnelItem) => {
-      item.checked = false;
-    });
+    selectedItems.value = [];
   };
 
   return {
     selectedCount,
     selectedItems,
-    handleRefreshChange,
-    handleCheckChange,
-    handleCellClick,
+    handlePersonClick,
+    handleOrgClick,
     handleSearch,
-    handleClear
+    handleClear,
+    isPersonDisabled
   };
 };
 

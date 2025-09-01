@@ -1,13 +1,10 @@
 import type { ApiConfig } from '../api';
-import type { RouteState } from './useOrganizationRouteParams';
 import { ref } from 'vue';
 import { createOrganizationApi } from '../api';
 
 const useOrganizationApi = ({
-  routeState,
   apiConfig
 }: {
-  routeState: RouteState;
   apiConfig: ApiConfig;
 }) => {
   const api = createOrganizationApi(apiConfig);
@@ -19,7 +16,7 @@ const useOrganizationApi = ({
     }
 
     // 获取顶级组织架构
-    if (routeState.depth === 1) {
+    if (!params.dwh) {
       return await getTopLevelOrganizations();
     }
 

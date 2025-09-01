@@ -26,12 +26,12 @@ export default {
 
     // 使用 hook
     const {
-      dataSource,  // 数据源
-      state,       // 状态管理
-      onLoad,      // 加载数据
-      onRefresh,   // 刷新数据
-      onSearch,    // 搜索
-      onReset      // 重置
+      dataSource, // 数据源
+      state, // 状态管理
+      onLoad, // 加载数据
+      onRefresh, // 刷新数据
+      onSearch, // 搜索
+      onReset // 重置
     } = useRefreshList({
       api: fetchList,
       extraParams: { status: 'active' }
@@ -51,10 +51,10 @@ export default {
 
 ### API 参数
 
-| 参数 | 类型 | 必填 | 默认值 | 说明 |
-|------|------|------|--------|------|
-| api | Function | 是 | - | 获取数据的 API 函数 |
-| extraParams | Object | 否 | {} | 额外的请求参数 |
+| 参数        | 类型     | 必填 | 默认值 | 说明                |
+| ----------- | -------- | ---- | ------ | ------------------- |
+| api         | Function | 是   | -      | 获取数据的 API 函数 |
+| extraParams | Object   | 否   | {}     | 额外的请求参数      |
 
 ### API 函数格式
 
@@ -71,31 +71,31 @@ API 函数需要返回符合以下格式的数据：
 
 ### 返回值
 
-| 属性 | 类型 | 说明 |
-|------|------|------|
-| dataSource | Ref<T[]> | 当前数据列表 |
-| state | Reactive | 状态对象，包含 loading、finished、error 等 |
-| onLoad | Function | 加载数据函数 |
-| onRefresh | Function | 刷新数据函数 |
-| onSearch | Function | 搜索函数，接受搜索参数 |
-| onReset | Function | 重置搜索函数 |
+| 属性       | 类型     | 说明                                       |
+| ---------- | -------- | ------------------------------------------ |
+| dataSource | Ref<T[]> | 当前数据列表                               |
+| state      | Reactive | 状态对象，包含 loading、finished、error 等 |
+| onLoad     | Function | 加载数据函数                               |
+| onRefresh  | Function | 刷新数据函数                               |
+| onSearch   | Function | 搜索函数，接受搜索参数                     |
+| onReset    | Function | 重置搜索函数                               |
 
 ### 状态说明
 
 ```typescript
 state = {
-  finished: boolean,    // 是否已加载完所有数据
-  isLoading: boolean,   // 是否正在刷新
-  loading: boolean,     // 是否正在加载更多
-  error: boolean,       // 是否有错误
+  finished: boolean, // 是否已加载完所有数据
+  isLoading: boolean, // 是否正在刷新
+  loading: boolean, // 是否正在加载更多
+  error: boolean, // 是否有错误
   pageable: {
-    pageNum: number,    // 当前页码
-    pageSize: number,   // 每页大小
-    totalRow: number    // 总行数
+    pageNum: number, // 当前页码
+    pageSize: number, // 每页大小
+    totalRow: number // 总行数
   },
-  totalParam: object,   // 总请求参数
-  searchParam: object   // 搜索参数
-}
+  totalParam: object, // 总请求参数
+  searchParam: object // 搜索参数
+};
 ```
 
 ### 完整示例
@@ -128,8 +128,8 @@ state = {
 </template>
 
 <script setup>
-import { ref } from 'vue';
 import { useRefreshList } from '@J/vue-h5-components';
+import { ref } from 'vue';
 
 const searchKeyword = ref('');
 
@@ -187,7 +187,7 @@ export default function useCustomHook() {
   };
 }
 
+export { default as useCustomHook } from './useCustomHook';
 // src/hooks/index.ts
 export { default as useRefreshList } from './useRefreshList';
-export { default as useCustomHook } from './useCustomHook';
 ```

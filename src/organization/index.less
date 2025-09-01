@@ -1,129 +1,3 @@
-// 引入样式变量
-@import '@/styles/variables.less';
-
-/* ===== 容器样式 ===== */
-.organization-container {
-  position: relative;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  background-color: var(--j-background-color);
-}
-
-/* ===== 搜索区域 ===== */
-.search-section {
-  position: sticky;
-  top: 0;
-  z-index: 20;
-  padding: var(--j-spacing-md);
-}
-
-/* ===== 内容区域 ===== */
-.content-section {
-  flex: 1;
-  overflow-y: auto;
-  padding: 0 var(--j-spacing-xl);
-}
-
-/* ===== 列表容器 ===== */
-.list-container {
-  padding-bottom: var(--j-spacing-lg);
-}
-
-/* ===== 组织机构项样式 ===== */
-.org-item {
-  border-bottom: 1px solid var(--j-border-color);
-  padding: var(--j-spacing-md) 0;
-  transition: all 0.3s ease-in-out;
-
-  &:active {
-    background-color: var(--j-background-color-light);
-  }
-}
-
-/* ===== 人员项样式 ===== */
-.person-item {
-  border-bottom: 1px solid var(--j-border-color);
-  padding: var(--j-spacing-md) 0;
-  transition: all 0.3s ease-in-out;
-
-  &:active {
-    background-color: var(--j-background-color-light);
-  }
-}
-
-/* ===== 项目内容布局 ===== */
-.item-content {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-/* ===== 组织机构信息 ===== */
-.org-info {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 36px;
-  color: var(--j-text-color);
-}
-
-/* ===== 组织机构图标 ===== */
-.org-icon {
-  margin-right: var(--j-spacing-md);
-  width: 48px;
-  height: 48px;
-}
-
-/* ===== 箭头图标 ===== */
-.arrow-icon {
-  color: var(--j-text-color-disabled);
-}
-
-/* ===== 人员信息 ===== */
-.person-info {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 36px;
-  color: var(--j-text-color);
-}
-
-/* ===== 人员图标 ===== */
-.person-icon {
-  margin-right: var(--j-spacing-sm);
-  color: var(--j-text-color-secondary);
-}
-
-/* ===== 底部操作栏 ===== */
-.footer-bar {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  z-index: 10;
-  height: 100px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: var(--j-background-color);
-  padding: var(--j-spacing-xl);
-  box-shadow: 0px 5px 38px 0px rgba(4, 0, 0, 0.1);
-}
-
-/* ===== 选中计数 ===== */
-.selected-count {
-  font-size: 32px;
-  color: var(--j-text-color);
-}
-
-/* ===== 按钮组 ===== */
-.footer-buttons {
-  display: flex;
-  justify-content: flex-end;
-  gap: var(--j-spacing-lg);
-}
 
 /* ===== 列表动画效果 ===== */
 .list-enter-active,
@@ -136,3 +10,191 @@
   opacity: 0;
   transform: translateX(30px);
 }
+
+/* ===== 弹窗模式样式 ===== */
+.organization-popup {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+}
+
+/* 弹窗头部 */
+.popup-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px 12px;
+  background: white;
+  border-bottom: 1px solid #eee;
+  flex-shrink: 0;
+
+  .header-left {
+    display: flex;
+    flex-direction: column;
+
+    h3 {
+      margin: 0;
+      font-size: 18px;
+      font-weight: 500;
+      color: #333;
+      line-height: 1.2;
+    }
+
+    .selected-count {
+      margin-top: 4px;
+      font-size: 12px;
+      color: #999;
+    }
+  }
+
+  .header-right {
+    display: flex;
+    gap: 8px;
+  }
+}
+
+/* 搜索区域 */
+.search-section {
+  background: white;
+  border-bottom: 1px solid #eee;
+  padding: 12px 20px;
+  flex-shrink: 0;
+}
+
+/* 面包屑导航 */
+.breadcrumb-nav {
+  background: white;
+  border-bottom: 1px solid #eee;
+  padding: 8px 20px;
+  flex-shrink: 0;
+
+  .breadcrumb-content {
+    display: flex;
+    align-items: center;
+    overflow-x: auto;
+    white-space: nowrap;
+
+    .breadcrumb-item {
+      display: inline-flex;
+      align-items: center;
+      font-size: 14px;
+      color: #1989fa;
+      cursor: pointer;
+      flex-shrink: 0;
+
+      &.active {
+        color: #333;
+        cursor: default;
+      }
+
+      .van-icon {
+        margin: 0 8px;
+        color: #999;
+        font-size: 12px;
+      }
+    }
+  }
+}
+
+/* 弹窗内容区域 */
+.popup-content {
+  flex: 1;
+  overflow: hidden;
+  padding: 8px 0;
+
+  .org-list {
+    padding: 8px 0;
+
+    .org-item, .person-item {
+      background: white;
+      margin: 0 12px 8px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s;
+      box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+
+      &:active {
+        transform: scale(0.98);
+        background-color: #f2f3f5;
+        box-shadow: 0 0 4px rgba(0, 0, 0, 0.15);
+      }
+
+      .item-content {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 14px 16px;
+      }
+    }
+
+    .org-item {
+      .org-info {
+        display: flex;
+        align-items: center;
+
+        .org-icon {
+          margin-right: 12px;
+          color: #1989fa;
+          font-size: 20px;
+        }
+
+        .org-name {
+          font-size: 16px;
+          color: #333;
+          font-weight: 500;
+        }
+      }
+
+      .arrow-icon {
+        color: #999;
+        font-size: 16px;
+      }
+    }
+
+    .person-item {
+      .person-info {
+        display: flex;
+        align-items: center;
+
+        .person-icon {
+          margin-right: 12px;
+          color: #07c160;
+          font-size: 20px;
+        }
+
+        .person-details {
+          .person-name {
+            font-size: 16px;
+            color: #333;
+            line-height: 1.2;
+          }
+
+          .person-id {
+            font-size: 12px;
+            color: #999;
+            margin-top: 2px;
+          }
+        }
+      }
+    }
+  }
+}
+
+/* 弹窗底部操作 */
+.popup-footer {
+  display: flex;
+  gap: 12px;
+  padding: 12px 20px 20px;
+  background: white;
+  border-top: 1px solid #eee;
+  flex-shrink: 0;
+
+  .van-button {
+    flex: 1;
+    height: 44px;
+    border-radius: 6px;
+    font-size: 16px;
+  }
+}
+

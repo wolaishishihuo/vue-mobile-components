@@ -56,7 +56,7 @@ export const createOrganizationApi = (config: ApiConfig) => {
       }
 
       const data = await response.json();
-      return { data };
+      return { data: data.data || data };
     } catch (error) {
       console.error('请求失败:', error);
       throw error;
