@@ -56,6 +56,7 @@
 import { ref } from 'vue';
 import ContentCardDemo from './contentCard/demo/index.vue';
 import ImgUploaderDemo from './imgUploader/demo/index.vue';
+import OrganizationDemo from './organization/demo/index.vue';
 import PullToRefreshListDemo from './pullToRefreshList/demo/index.vue';
 import StepsCardDemo from './stepsCard/demo/index.vue';
 import TabsDemo from './tabs/demo/index.vue';
@@ -100,6 +101,13 @@ const componentList = ref([
     desc: '支持下拉刷新和上拉加载的列表组件',
     status: '已完成',
     demo: PullToRefreshListDemo
+  },
+  {
+    id: 'organization',
+    name: 'Organization 组织机构',
+    desc: '用于展示组织机构',
+    status: '已完成',
+    demo: OrganizationDemo
   }
 
 ]);

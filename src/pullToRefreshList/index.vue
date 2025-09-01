@@ -47,6 +47,16 @@
 import { onMounted } from 'vue';
 import useRefreshList from '@/hooks/useRefreshList';
 
+defineOptions({
+  name: 'JPullToRefreshList'
+});
+
+const props = withDefaults(defineProps<Props>(), {
+  disablePullRefresh: false,
+  extraParams: () => ({}),
+  immediate: true
+});
+
 interface Props {
   extraParams?: Record<string, unknown>;
   apiFn: (params: any) => Promise<any>;
@@ -54,12 +64,6 @@ interface Props {
   disablePullRefresh?: boolean;
   [key: string]: any;
 }
-
-const props = withDefaults(defineProps<Props>(), {
-  disablePullRefresh: false,
-  extraParams: () => ({}),
-  immediate: true
-});
 
 const { dataSource, state, onRefresh, onLoad, onSearch, onReset } = useRefreshList({
   api: props.apiFn,
