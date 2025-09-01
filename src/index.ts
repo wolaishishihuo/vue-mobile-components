@@ -9,6 +9,9 @@ import JTabs from './tabs';
 // 导入样式
 import './styles/index.less';
 
+// 导出 hooks
+export * from './hooks';
+
 // 导出类型
 export * from './types';
 
