@@ -20,7 +20,6 @@
           :key="component.id"
           :title="component.name"
           :label="component.desc"
-          :icon="component.icon"
           is-link
           @click="showComponent(component)"
         >
@@ -68,7 +67,6 @@ const componentList = ref([
     id: 'stepsCard',
     name: 'StepsCard 步骤卡片',
     desc: '用于展示步骤流程或时间轴信息',
-    icon: 'todo-list-o',
     status: '已完成',
     demo: StepsCardDemo
   },
@@ -76,7 +74,6 @@ const componentList = ref([
     id: 'tabs',
     name: 'Tabs 标签',
     desc: '用于展示标签页',
-    icon: 'tab',
     status: '已完成',
     demo: TabsDemo
   }
