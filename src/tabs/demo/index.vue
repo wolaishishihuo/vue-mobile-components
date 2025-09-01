@@ -1,10 +1,7 @@
 <template>
-  <div class="demo-container">
-    <h1>Tabs 选项卡组件演示</h1>
-
-    <!-- 基础用法 -->
-    <section class="demo-section">
-      <h2>基础用法</h2>
+  <div class="tabs-demo">
+    <h3>基础用法</h3>
+    <div class="demo-section">
       <Tabs
         v-model:model-value="activeTab1"
         :tab-options="basicTabs"
@@ -13,11 +10,10 @@
       <p class="result">
         当前选中：{{ activeTab1 }}
       </p>
-    </section>
+    </div>
 
-    <!-- 带计数的标签 -->
-    <section class="demo-section">
-      <h2>带计数的标签</h2>
+    <h3>带计数的标签</h3>
+    <div class="demo-section">
       <Tabs
         v-model:model-value="activeTab2"
         :tab-options="tabsWithCount"
@@ -26,11 +22,10 @@
       <p class="result">
         当前选中：{{ activeTab2 }}
       </p>
-    </section>
+    </div>
 
-    <!-- 多标签场景 -->
-    <section class="demo-section">
-      <h2>多标签场景</h2>
+    <h3>多标签场景</h3>
+    <div class="demo-section">
       <Tabs
         v-model:model-value="activeTab3"
         :tab-options="manyTabs"
@@ -39,11 +34,10 @@
       <p class="result">
         当前选中：{{ activeTab3 }}
       </p>
-    </section>
+    </div>
 
-    <!-- 内容展示区域 -->
-    <section class="demo-section">
-      <h2>内容区域</h2>
+    <h3>内容区域</h3>
+    <div class="demo-section">
       <Tabs
         v-model:model-value="activeTab4"
         :tab-options="contentTabs"
@@ -51,23 +45,23 @@
       />
       <div class="content-area">
         <div v-if="activeTab4 === 'home'" class="tab-content">
-          <h3>首页内容</h3>
+          <h4>首页内容</h4>
           <p>这里是首页的内容区域，展示主要功能和信息。</p>
         </div>
         <div v-else-if="activeTab4 === 'products'" class="tab-content">
-          <h3>产品列表</h3>
+          <h4>产品列表</h4>
           <p>这里展示所有的产品信息和分类。</p>
         </div>
         <div v-else-if="activeTab4 === 'about'" class="tab-content">
-          <h3>关于我们</h3>
+          <h4>关于我们</h4>
           <p>了解更多关于我们公司的信息和历史。</p>
         </div>
         <div v-else-if="activeTab4 === 'contact'" class="tab-content">
-          <h3>联系方式</h3>
+          <h4>联系方式</h4>
           <p>获取我们的联系信息和地址。</p>
         </div>
       </div>
-    </section>
+    </div>
   </div>
 </template>
 
@@ -139,25 +133,26 @@ const handleContentTabChange = (value: string) => {
 </script>
 
 <style scoped>
-.demo-container {
-  padding: 20px;
-  max-width: 800px;
-  margin: 0 auto;
+.tabs-demo {
+  width: 100%;
+  padding: 0;
+  background: transparent;
+}
+
+h3 {
+  margin: 20px 0 15px 0;
+  color: #323233;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 0 5px;
 }
 
 .demo-section {
-  margin-bottom: 40px;
-  padding: 20px;
-  border: 1px solid #e0e0e0;
+  margin-bottom: 25px;
+  background: white;
   border-radius: 8px;
-  background: #fff;
-}
-
-.demo-section h2 {
-  margin-top: 0;
-  margin-bottom: 20px;
-  font-size: 18px;
-  color: #333;
+  padding: 15px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
 }
 
 .result {
@@ -166,7 +161,7 @@ const handleContentTabChange = (value: string) => {
   background: #f5f5f5;
   border-radius: 4px;
   font-size: 14px;
-  color: #666;
+  color: #646566;
 }
 
 .content-area {
@@ -178,14 +173,17 @@ const handleContentTabChange = (value: string) => {
   background: #fafafa;
 }
 
-.tab-content h3 {
+.tab-content h4 {
   margin-top: 0;
-  color: #333;
+  margin-bottom: 10px;
+  color: #323233;
   font-size: 16px;
+  font-weight: 600;
 }
 
 .tab-content p {
-  color: #666;
-  line-height: 1.6;
+  color: #646566;
+  line-height: 1.5;
+  margin: 0;
 }
 </style>

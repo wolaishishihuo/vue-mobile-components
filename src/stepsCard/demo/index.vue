@@ -192,6 +192,7 @@ import StepsCard from '../index.vue';
 
 <style scoped>
 .steps-card-demo {
+  width: 100%;
   padding: 0;
   background: transparent;
 }
