@@ -3,6 +3,7 @@
 // export * from '../components/core/ArticleCard/types'
 // export * from '../components/core/TableTree/interface'
 
+export * from '../contentCard/types';
 export * from '../tabs/types';
 
 // 公共类型定义

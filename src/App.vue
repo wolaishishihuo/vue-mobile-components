@@ -54,6 +54,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
+import ContentCardDemo from './contentCard/demo/index.vue';
 import StepsCardDemo from './stepsCard/demo/index.vue';
 import TabsDemo from './tabs/demo/index.vue';
 
@@ -76,6 +77,13 @@ const componentList = ref([
     desc: '用于展示标签页',
     status: '已完成',
     demo: TabsDemo
+  },
+  {
+    id: 'contentCard',
+    name: 'ContentCard 内容卡片',
+    desc: '用于展示内容卡片',
+    status: '已完成',
+    demo: ContentCardDemo
   }
 
 ]);
@@ -116,6 +124,7 @@ const goBack = () => {
   padding: 20px;
   background: white;
   border-radius: 8px;
+  margin: 0 16px;
   margin-bottom: 16px;
   min-height: 200px;
   display: flex;

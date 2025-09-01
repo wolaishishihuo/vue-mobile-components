@@ -45,7 +45,6 @@ export default defineConfig({
         'vant',
         '@vueuse/core',
         '@vant/use',
-        'dayjs',
         'lodash-es'
       ],
       output: {
@@ -55,7 +54,6 @@ export default defineConfig({
           'vant': 'Vant',
           '@vueuse/core': 'VueUse',
           '@vant/use': 'VantUse',
-          'dayjs': 'dayjs',
           'lodash-es': 'lodash'
         }
       }
