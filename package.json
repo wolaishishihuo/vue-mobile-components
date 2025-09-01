@@ -18,13 +18,13 @@
   "exports": {
     ".": {
       "types": "./lib/index.d.ts",
-      "import": "./lib/index.es.js",
+      "import": "./lib/index.mjs",
       "require": "./lib/index.umd.js"
     },
     "./lib/style.css": "./lib/style.css"
   },
   "main": "./lib/index.umd.js",
-  "module": "./lib/index.es.js",
+  "module": "./lib/index.mjs",
   "types": "./lib/index.d.ts",
   "files": [
     "README.md",
