@@ -154,7 +154,7 @@
         v-model="customSizeFiles"
         :multiple="true"
         :max-count="4"
-        :preview-size="[60, 40]"
+        :preview-size="[200, 200]"
         upload-text="200x200预览"
       />
     </div>
