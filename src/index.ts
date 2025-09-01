@@ -1,6 +1,7 @@
 import type { App } from 'vue';
 
 import JContentCard from './contentCard';
+import JImgUploader from './imgUploader';
 import JStepsCard from './stepsCard';
 import JTabs from './tabs';
 
@@ -14,10 +15,10 @@ export * from './types';
 export * from './utils';
 
 // 导出组件
-export { JContentCard, JStepsCard, JTabs };
+export { JContentCard, JImgUploader, JStepsCard, JTabs };
 
 // 组件列表
-const components = [JStepsCard, JTabs, JContentCard];
+const components = [JStepsCard, JTabs, JContentCard, JImgUploader];
 
 // 定义安装函数
 const install = (app: App) => {

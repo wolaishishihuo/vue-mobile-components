@@ -55,6 +55,7 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import ContentCardDemo from './contentCard/demo/index.vue';
+import ImgUploaderDemo from './imgUploader/demo/index.vue';
 import StepsCardDemo from './stepsCard/demo/index.vue';
 import TabsDemo from './tabs/demo/index.vue';
 
@@ -84,6 +85,13 @@ const componentList = ref([
     desc: '用于展示内容卡片',
     status: '已完成',
     demo: ContentCardDemo
+  },
+  {
+    id: 'imgUploader',
+    name: 'ImgUploader 图片上传',
+    desc: '用于展示图片上传',
+    status: '已完成',
+    demo: ImgUploaderDemo
   }
 
 ]);
