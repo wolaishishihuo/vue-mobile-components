@@ -1,4 +1,4 @@
-import { computed, reactive, ref, watch } from 'vue';
+import { computed, reactive, ref } from 'vue';
 
 const useRefreshList = <T extends object>({
   api,
@@ -30,9 +30,6 @@ const useRefreshList = <T extends object>({
     searchParam: {}
   });
 
-  // 初始参数
-  const initialExtraParams = { ...extraParams };
-
   // 分页参数
   const pageParam = computed(() => ({
     pageNum: state.pageable.pageNum,
@@ -43,7 +40,7 @@ const useRefreshList = <T extends object>({
   const getList = async () => {
     try {
       state.totalParam = {};
-      Object.assign(state.totalParam, initialExtraParams, state.searchParam, pageParam.value);
+      Object.assign(state.totalParam, extraParams, state.searchParam, pageParam.value);
       const { data } = await api(state.totalParam);
       const { records, total } = data;
       state.pageable.totalRow = total;
@@ -116,14 +113,6 @@ const useRefreshList = <T extends object>({
   const onReset = () => {
     onSearch({});
   };
-
-  watch(
-    () => extraParams,
-    (val) => {
-      Object.assign(initialExtraParams, val || {});
-    },
-    { deep: true }
-  );
 
   return {
     dataSource,

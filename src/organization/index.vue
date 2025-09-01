@@ -5,21 +5,21 @@
     :style="{ height: popupHeight }"
     round
     closeable
+    :destroy-on-close="true"
     close-icon-position="top-right"
     @close="handlePopupClose"
   >
     <div class="organization-popup">
       <!-- 弹窗头部 -->
       <div class="popup-header">
-        <div class="header-left">
-          <h3>{{ popupTitle }}</h3>
-          <div v-if="selectedCount > 0" class="selected-count">
+        <h3 class="popup-title">
+          {{ popupTitle }}
+        </h3>
+        <div v-if="selectedCount > 0" class="header-actions">
+          <div class="selected-count">
             已选择{{ selectedCount }}人
           </div>
-        </div>
-        <div class="header-right">
           <van-button
-            v-if="selectedCount > 0"
             size="mini"
             @click="handleClear"
           >
@@ -56,7 +56,7 @@
       </div>
 
       <!-- 组织架构内容 -->
-      <div class="popup-content">
+      <div v-if="popupVisible" class="popup-content">
         <PullToRefreshList
           ref="refreshListRef"
           :api-fn="getOrganizationList"
@@ -99,7 +99,6 @@
                       <van-checkbox
                         :model-value="item.checked"
                         :disabled="isPersonDisabled(item)"
-                        @click.stop
                       />
                     </div>
                   </div>
@@ -237,8 +236,8 @@ const handleOrgClick = async (org: PersonnelItem) => {
   // 添加到面包屑
   addBreadcrumb({
     id: org.id,
-    name: org.name,
-    dwh: org.dwh
+    name: org.name || org.xm, // 组织结构可能使用 name，人员使用 xm
+    dwh: org.dwh || org.id // 如果没有 dwh 字段，尝试使用 id
   });
 
   // 清空缓存并刷新数据
@@ -260,13 +259,14 @@ const handleBreadcrumbClick = async (index: number) => {
 
 // 处理搜索
 const handleSearch = () => {
-  refreshListRef.value?.onSearch({ xm: searchKeyword.value });
+  // 直接刷新数据，因为 searchState 已经通过 v-model 自动更新了
+  refreshListRef.value?.onRefresh();
 };
 
 // 处理搜索清空
 const handleSearchClear = () => {
-  searchKeyword.value = '';
-  refreshListRef.value?.onSearch({ xm: '' });
+  // searchKeyword 已经通过 v-model 自动清空了，直接刷新
+  refreshListRef.value?.onRefresh();
 };
 
 // 弹窗确认
@@ -286,13 +286,20 @@ const handlePopupClose = () => {
   emit('close');
 };
 
+// 初始化状态 - 仅在打开时调用
+const initializeState = () => {
+  // 重置搜索状态和面包屑
+  resetState();
+  // 清空选中的人员
+  handleClear();
+  // 清空组织架构缓存
+  organizationCatch.value.clear();
+};
+
 // 监听弹窗状态变化
 watch(popupVisible, (newVal) => {
   if (newVal) {
-    // 弹窗打开时初始化
-    resetState();
-    handleClear();
-    // 使用 refreshList 的刷新功能
+    initializeState();
     refreshListRef.value?.onRefresh();
   }
 });

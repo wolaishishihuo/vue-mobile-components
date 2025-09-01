@@ -23,6 +23,9 @@ export interface Organization {
  */
 export interface PersonnelItem extends Personnel {
   checked?: boolean;
+  dwh?: string; // 添加组织代码字段，用于组织结构项
+  isParent?: boolean; // 添加是否为父节点标识
+  name?: string; // 添加名称字段，组织结构项使用
   [key: string]: any;
 }
 

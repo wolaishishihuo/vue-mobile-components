@@ -21,36 +21,28 @@
 
 /* 弹窗头部 */
 .popup-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
   padding: 16px 20px 12px;
   background: white;
   border-bottom: 1px solid #eee;
   flex-shrink: 0;
 
-  .header-left {
-    display: flex;
-    flex-direction: column;
+  .popup-title {
+    margin: 0 0 8px 0;
+    font-size: 18px;
+    font-weight: 500;
+    color: #333;
+    line-height: 1.2;
+  }
 
-    h3 {
-      margin: 0;
-      font-size: 18px;
-      font-weight: 500;
-      color: #333;
-      line-height: 1.2;
-    }
+  .header-actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 
     .selected-count {
-      margin-top: 4px;
       font-size: 12px;
       color: #999;
     }
-  }
-
-  .header-right {
-    display: flex;
-    gap: 8px;
   }
 }
 
@@ -66,7 +58,7 @@
 .breadcrumb-nav {
   background: white;
   border-bottom: 1px solid #eee;
-  padding: 8px 20px;
+  padding: 10px 20px;
   flex-shrink: 0;
 
   .breadcrumb-content {
@@ -100,11 +92,13 @@
 /* 弹窗内容区域 */
 .popup-content {
   flex: 1;
-  overflow: hidden;
-  padding: 8px 0;
+  background: #f8f8f8;
+  overflow-y: auto;
+  overflow-x: hidden;
 
   .org-list {
-    padding: 8px 0;
+    padding: 12px 0;
+    min-height: 100%;
 
     .org-item, .person-item {
       background: white;
