@@ -1,48 +1,32 @@
 <template>
-  <div class="v-image-uploader">
-    <!-- 主上传组件 -->
-    <van-uploader
-      v-model="innerFileList"
-      v-bind="$attrs"
-      :max-count="maxCount"
-      :max-size="maxSize"
-      :multiple="multiple"
-      :disabled="disabled"
-      :readonly="readonly"
-      :deletable="deletable"
-      :before-read="handleBeforeRead"
-      @oversize="$emit('oversize', $event)"
-      @delete="handleDelete"
-      @click-preview="handlePreview"
-    >
-      <!-- 传递上传区域默认插槽 -->
-      <template #default>
-        <slot>
-          <!-- 默认上传区域 -->
-          <div v-if="showUploadArea" class="upload-area">
-            <van-icon name="photograph" size="24" />
-            <div class="upload-text">
-              {{ uploadText }}
-            </div>
-          </div>
-        </slot>
-      </template>
+  <van-uploader
+    v-model="innerFileList"
+    v-bind="$attrs"
+    :max-count="maxCount"
+    :max-size="maxSize"
+    :multiple="multiple"
+    :disabled="disabled"
+    :readonly="readonly"
+    :deletable="deletable"
+    :before-read="handleBeforeRead"
+    @oversize="$emit('oversize', $event)"
+    @delete="handleDelete"
+    @click-preview="handlePreview"
+  >
+    <!-- 传递预览覆盖插槽 -->
+    <template #preview-cover="{ file, index }">
+      <slot name="preview-cover" :file="file" :index="index" />
+    </template>
 
-      <!-- 传递预览覆盖插槽 -->
-      <template #preview-cover="{ file, index }">
-        <slot name="preview-cover" :file="file" :index="index" />
-      </template>
+    <!-- 传递其他所有插槽 -->
+    <template v-for="name in computedSlots" :key="name" #[name]="slotData">
+      <slot :name="name" v-bind="slotData || {}" />
+    </template>
+  </van-uploader>
 
-      <!-- 传递其他所有插槽 -->
-      <template v-for="name in computedSlots" :key="name" #[name]="slotData">
-        <slot :name="name" v-bind="slotData" />
-      </template>
-    </van-uploader>
-
-    <!-- 错误信息 -->
-    <div v-if="errorMsg" class="upload-error">
-      {{ errorMsg }}
-    </div>
+  <!-- 错误信息 -->
+  <div v-if="errorMsg" class="upload-error">
+    {{ errorMsg }}
   </div>
 </template>
 
@@ -90,11 +74,6 @@ const computedSlots = computed(() => {
 const innerFileList = ref<UploaderFileListItem[]>([]);
 const errorMsg = ref('');
 
-// 计算是否显示上传区域（当达到最大数量时隐藏）
-const showUploadArea = computed(() => {
-  return innerFileList.value.length < props.maxCount;
-});
-
 // 格式化错误信息
 const formattedFormatErrorMsg = computed(() => {
   if (props.formatErrorMsg) return props.formatErrorMsg;
@@ -124,7 +103,11 @@ watch(
 watch(
   innerFileList,
   (newVal) => {
-    emit('update:modelValue', newVal);
+    // 避免循环更新：只在值真正不同时才emit
+    const currentModelValue = convertToFileList(props.modelValue);
+    if (JSON.stringify(newVal) !== JSON.stringify(currentModelValue)) {
+      emit('update:modelValue', newVal);
+    }
   },
   { deep: true }
 );
@@ -212,28 +195,7 @@ defineExpose({
 });
 </script>
 
-<style scoped>
-.v-image-uploader {
-  width: 100%;
-}
-
-.upload-area {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 100%;
-  padding: 16px;
-  box-sizing: border-box;
-}
-
-.upload-text {
-  margin-top: 8px;
-  font-size: 12px;
-  color: #969799;
-}
-
+<style scoped lang="less">
 .upload-error {
   margin-top: 8px;
   font-size: 12px;
