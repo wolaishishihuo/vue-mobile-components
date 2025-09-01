@@ -2,6 +2,7 @@ import type { App } from 'vue';
 
 import JContentCard from './contentCard';
 import JImgUploader from './imgUploader';
+import JPullToRefreshList from './pullToRefreshList';
 import JStepsCard from './stepsCard';
 import JTabs from './tabs';
 
@@ -11,14 +12,11 @@ import './styles/index.less';
 // 导出类型
 export * from './types';
 
-// 导出工具函数
-export * from './utils';
-
 // 导出组件
-export { JContentCard, JImgUploader, JStepsCard, JTabs };
+export { JContentCard, JImgUploader, JPullToRefreshList, JStepsCard, JTabs };
 
 // 组件列表
-const components = [JStepsCard, JTabs, JContentCard, JImgUploader];
+const components = [JStepsCard, JTabs, JContentCard, JImgUploader, JPullToRefreshList];
 
 // 定义安装函数
 const install = (app: App) => {
