@@ -30,7 +30,7 @@
 
       <!-- 面包屑导航 -->
       <div v-if="breadcrumbs.length > 1" class="breadcrumb-nav">
-        <div class="breadcrumb-content">
+        <div ref="breadcrumbRef" class="breadcrumb-content">
           <span
             v-for="(item, index) in breadcrumbs"
             :key="item.id || 'root'"
@@ -129,7 +129,7 @@
 
 <script setup lang="ts">
 import type { PersonnelItem } from './types';
-import { computed, ref, watch } from 'vue';
+import { computed, nextTick, ref, watch } from 'vue';
 import PullToRefreshList from '@/pullToRefreshList/index.vue';
 import { useOrganizationActions, useOrganizationApi, useOrganizationState } from './composables';
 
@@ -181,6 +181,9 @@ const popupVisible = computed({
 // 下拉刷新列表引用
 const refreshListRef = ref<InstanceType<typeof PullToRefreshList>>();
 
+// 面包屑容器引用
+const breadcrumbRef = ref<HTMLElement>();
+
 // 组织架构API
 const { organizationCatch, getOrganizationList } = useOrganizationApi({
   apiConfig: props.apiConfig
@@ -231,6 +234,14 @@ watch(selectedItems, () => {
   syncSelectedState();
 }, { deep: true });
 
+// 滚动面包屑到最新位置
+const scrollBreadcrumbToEnd = async () => {
+  await nextTick();
+  if (breadcrumbRef.value) {
+    breadcrumbRef.value.scrollLeft = breadcrumbRef.value.scrollWidth;
+  }
+};
+
 // 处理组织点击
 const handleOrgClick = async (org: PersonnelItem) => {
   // 添加到面包屑
@@ -259,13 +270,11 @@ const handleBreadcrumbClick = async (index: number) => {
 
 // 处理搜索
 const handleSearch = () => {
-  // 直接刷新数据，因为 searchState 已经通过 v-model 自动更新了
   refreshListRef.value?.onRefresh();
 };
 
 // 处理搜索清空
 const handleSearchClear = () => {
-  // searchKeyword 已经通过 v-model 自动清空了，直接刷新
   refreshListRef.value?.onRefresh();
 };
 
@@ -295,6 +304,11 @@ const initializeState = () => {
   // 清空组织架构缓存
   organizationCatch.value.clear();
 };
+
+// 监听面包屑变化，自动滚动到最新位置
+watch(breadcrumbs, () => {
+  scrollBreadcrumbToEnd();
+}, { deep: true });
 
 // 监听弹窗状态变化
 watch(popupVisible, (newVal) => {
