@@ -3,6 +3,8 @@
 // export * from '../components/core/ArticleCard/types'
 // export * from '../components/core/TableTree/interface'
 
+export * from '../tabs/types';
+
 // 公共类型定义
 export interface ComponentOptions {
   size?: 'small' | 'medium' | 'large';

@@ -39,7 +39,7 @@
 import { computed, onMounted, onUpdated, ref, useSlots } from 'vue';
 
 defineOptions({
-  name: 'StepsCard'
+  name: 'JStepsCard'
 });
 
 const slots = useSlots();

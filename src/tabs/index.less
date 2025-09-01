@@ -1,0 +1,46 @@
+.tabs-container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  gap: 5rem; /* gap-20 = 20 * 0.25rem = 5rem */
+  overflow-x: auto;
+  white-space: nowrap;
+  padding: 16px 0;
+
+  .tab-item {
+    position: relative;
+    cursor: pointer;
+    padding-bottom: 8px;
+    font-size: 28px;
+    color: #999;
+    transition: all 0.3s ease-in-out;
+
+    &.active {
+      color: #333 !important;
+      font-size: 30px;
+      font-weight: 500;
+    }
+
+    .tab-count {
+      margin-left: 4px;
+    }
+
+    .tab-indicator {
+      position: absolute;
+      bottom: 10px;
+      left: 0;
+      right: 0;
+      height: 13px;
+      width: 100%;
+      border-radius: 7px;
+      background-color: #3875c6;
+      opacity: 0;
+      transition: all 0.3s ease-in-out;
+
+      &.active {
+        opacity: 0.23;
+      }
+    }
+  }
+}
