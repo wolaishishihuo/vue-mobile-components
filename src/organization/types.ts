@@ -33,3 +33,28 @@ export interface PersonnelItem extends Personnel {
  * 组织架构和人员混合类型
  */
 export type OrganizationPickerItem = Organization | PersonnelItem;
+
+export interface Props {
+  /** 是否支持多选 */
+  multiple?: boolean;
+  /** 最大选择数量 */
+  maxSelected?: number;
+  /** API配置 */
+  apiConfig: {
+    baseUrl: string;
+    getToken: () => string;
+  };
+  /** 弹窗显示状态 */
+  modelValue?: boolean;
+  /** 弹窗标题 */
+  popupTitle?: string;
+  /** 弹窗高度 */
+  popupHeight?: string;
+}
+
+export interface Emits {
+  (e: 'update:modelValue', value: boolean): void;
+  (e: 'confirm', personnel: PersonnelItem[]): void;
+  (e: 'cancel'): void;
+  (e: 'close'): void;
+}

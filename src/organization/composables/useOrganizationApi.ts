@@ -31,7 +31,7 @@ const useOrganizationApi = ({
     return {
       data: {
         records: data,
-        totalRow: data.length
+        total: data.length
       }
     };
   };
@@ -43,7 +43,7 @@ const useOrganizationApi = ({
     return {
       data: {
         records: personRecords.data.list || [],
-        totalRow: personRecords.data.total
+        total: personRecords.data.total
       }
     };
   };
@@ -63,7 +63,7 @@ const useOrganizationApi = ({
     return {
       data: {
         records: [...orgList, ...personnelList],
-        totalRow: orgList.length + personRecords.total
+        total: orgList.length + personRecords.total
       }
     };
   };

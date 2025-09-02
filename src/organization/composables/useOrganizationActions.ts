@@ -3,94 +3,99 @@ import type { PersonnelItem } from '../types';
 import { showToast } from 'vant';
 import { computed, ref } from 'vue';
 
-const useOrganizationActions = ({
-  multiple = true,
-  maxSelected = 10,
-  organizationCatch,
-  searchState,
-  onOrgClick,
-  onRefresh
-}: {
+interface UseOrganizationActionsOptions {
   multiple?: boolean;
   maxSelected?: number;
-  organizationCatch: Ref<Map<string, true>>;
+  organizationCache: Ref<Map<string, true>>;
   searchState: Ref<{
     xm: string;
     dwh: string;
   }>;
-  onOrgClick?: (item: PersonnelItem) => void;
-  onRefresh?: () => void;
-}) => {
-  // 选择状态
-  const selectedItems = ref<PersonnelItem[]>([]);
+  onRefreshList?: () => void;
+}
 
-  // 已选择人数
-  const selectedCount = computed(() => selectedItems.value.length);
+const useOrganizationActions = ({
+  multiple = true,
+  maxSelected = 10,
+  organizationCache,
+  searchState,
+  onRefreshList
+}: UseOrganizationActionsOptions) => {
+  // 选中的人员列表
+  const selectedPersonnel = ref<PersonnelItem[]>([]);
 
-  // 处理人员点击选择
-  const handlePersonClick = (item: PersonnelItem) => {
-    if (isPersonDisabled(item)) return;
+  // 已选择人员数量
+  const selectedCount = computed(() => selectedPersonnel.value.length);
 
-    const isSelected = selectedItems.value.some(selected => selected.id === item.id);
+  // 处理人员选择/取消选择
+  const handlePersonSelection = (person: PersonnelItem) => {
+    if (isPersonDisabled(person)) return;
 
-    if (isSelected) {
-      // 取消选择
-      selectedItems.value = selectedItems.value.filter(selected => selected.id !== item.id);
+    const isAlreadySelected = selectedPersonnel.value.some(selected => selected.id === person.id);
+
+    if (isAlreadySelected) {
+      // 取消选择该人员
+      selectedPersonnel.value = selectedPersonnel.value.filter(selected => selected.id !== person.id);
     } else {
-      // 选择人员
+      // 选择该人员
       if (multiple) {
-        if (selectedItems.value.length >= maxSelected) {
+        if (selectedPersonnel.value.length >= maxSelected) {
           showToast(`最多选择${maxSelected}人`);
           return;
         }
-        selectedItems.value.push({ ...item, checked: true });
+        selectedPersonnel.value.push({ ...person, checked: true });
       } else {
-        selectedItems.value = [{ ...item, checked: true }];
+        selectedPersonnel.value = [{ ...person, checked: true }];
       }
     }
-
-    // 这里不需要同步，由外部组件处理
   };
 
-  // 判断人员是否禁用
+  // 判断人员是否禁用选择
   const isPersonDisabled = (person: PersonnelItem) => {
-    if (!multiple && selectedItems.value.length > 0) {
-      return !selectedItems.value.some(item => item.id === person.id);
+    if (!multiple && selectedPersonnel.value.length > 0) {
+      return !selectedPersonnel.value.some(item => item.id === person.id);
     }
-    if (selectedItems.value.length >= maxSelected) {
-      return !selectedItems.value.some(item => item.id === person.id);
+    if (selectedPersonnel.value.length >= maxSelected) {
+      return !selectedPersonnel.value.some(item => item.id === person.id);
     }
     return false;
   };
 
-  // 处理组织架构项点击事件
-  const handleOrgClick = (item: PersonnelItem) => {
-    if (!item.isParent) return;
-    onOrgClick?.(item);
-  };
-
-  const handleSearch = (keyword?: string) => {
+  // 处理搜索执行
+  const executeSearch = (keyword?: string) => {
     if (keyword !== undefined) {
       searchState.value.xm = keyword;
     }
     if (!searchState.value.xm) {
-      organizationCatch.value.clear();
+      organizationCache.value.clear();
     }
-    onRefresh?.();
+    onRefreshList?.();
   };
 
-  const handleClear = () => {
-    selectedItems.value = [];
+  // 清空所有选中的人员
+  const clearAllSelections = () => {
+    selectedPersonnel.value = [];
+  };
+
+  // 同步列表中的选中状态
+  const syncListSelectionState = (dataList: PersonnelItem[]) => {
+    if (!dataList) return;
+
+    dataList.forEach((item: PersonnelItem) => {
+      if (!item.isParent) {
+        item.checked = selectedPersonnel.value.some(selected => selected.id === item.id);
+      }
+    });
   };
 
   return {
     selectedCount,
-    selectedItems,
-    handlePersonClick,
-    handleOrgClick,
-    handleSearch,
-    handleClear,
-    isPersonDisabled
+    selectedPersonnel,
+    handlePersonSelection,
+    executeSearch,
+    clearAllSelections,
+    isPersonDisabled,
+    syncListSelectionState
   };
 };
 

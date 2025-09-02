@@ -1,25 +1,21 @@
-import { ref } from 'vue';
+import { nextTick, ref, watch } from 'vue';
 
 const useOrganizationState = () => {
   const searchState = ref({
     xm: '',
     dwh: ''
   });
-
+  // 面包屑容器引用
+  const breadcrumbRef = ref<HTMLElement>();
   // 面包屑导航状态
   const breadcrumbs = ref<Array<{ id?: string; name: string; dwh?: string }>>([
     { name: '全部' }
   ]);
 
-  // 设置当前组织
-  const setCurrentOrg = (dwh?: string) => {
-    searchState.value.dwh = dwh || '';
-  };
-
   // 添加面包屑
   const addBreadcrumb = (item: { id?: string; name: string; dwh?: string }) => {
     breadcrumbs.value.push(item);
-    setCurrentOrg(item.dwh);
+    searchState.value.dwh = item.dwh || '';
   };
 
   // 导航到指定层级
@@ -28,8 +24,19 @@ const useOrganizationState = () => {
 
     breadcrumbs.value = breadcrumbs.value.slice(0, index + 1);
     const current = breadcrumbs.value[index];
-    setCurrentOrg(current.dwh);
+    searchState.value.dwh = current.dwh || '';
   };
+
+  // 面包屑自动滚动
+  const scrollBreadcrumbToEnd = async () => {
+    await nextTick();
+    if (breadcrumbRef.value) {
+      breadcrumbRef.value.scrollLeft = breadcrumbRef.value.scrollWidth;
+    }
+  };
+
+  // 监听面包屑变化
+  watch(breadcrumbs, scrollBreadcrumbToEnd, { deep: true });
 
   // 重置状态
   const resetState = () => {
@@ -40,7 +47,7 @@ const useOrganizationState = () => {
   return {
     searchState,
     breadcrumbs,
-    setCurrentOrg,
+    breadcrumbRef,
     addBreadcrumb,
     navigateToBreadcrumb,
     resetState

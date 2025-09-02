@@ -1,8 +1,9 @@
+import type { Ref } from 'vue';
 import { computed, reactive, ref } from 'vue';
 
 const useRefreshList = <T extends object>({
   api,
-  extraParams = {}
+  extraParams = ref({})
 }: {
   api: (params: any) => Promise<{
     data: {
@@ -10,7 +11,7 @@ const useRefreshList = <T extends object>({
       total: number;
     };
   }>;
-  extraParams?: Record<string, unknown>;
+  extraParams?: Ref<Record<string, unknown>>;
   immediate?: boolean;
 }) => {
   const dataSource = ref<T[]>([]);
@@ -40,7 +41,7 @@ const useRefreshList = <T extends object>({
   const getList = async () => {
     try {
       state.totalParam = {};
-      Object.assign(state.totalParam, extraParams, state.searchParam, pageParam.value);
+      Object.assign(state.totalParam, extraParams.value, state.searchParam, pageParam.value);
       const { data } = await api(state.totalParam);
       const { records, total } = data;
       state.pageable.totalRow = total;
