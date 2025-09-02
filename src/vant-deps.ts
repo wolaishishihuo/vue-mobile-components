@@ -1,5 +1,4 @@
 // 静态导入 Vant 组件，确保样式正确加载
-import { Button, Checkbox, Icon, Image, List, Popup, PullRefresh, Search, Uploader } from 'vant';
 
 export const VANT_COMPONENTS = [
   // 基础组件
@@ -44,20 +43,35 @@ export const VANT_COMPONENT_MAP = {
 } as const;
 
 /**
- * 自动注册所有依赖的 Vant 组件
- * @param app Vue 应用实例
+ * 导入组件库依赖的 Vant 组件样式
+ * 解决自动导入插件无法处理第三方库内部 Vant 组件的问题
  */
-export function registerVantComponents(app: any) {
-  // 使用静态导入的组件，和你项目中的做法一致
-  app.use(Button);
-  app.use(Icon);
-  app.use(Image);
-  app.use(Search);
-  app.use(Checkbox);
-  app.use(Uploader);
-  app.use(List);
-  app.use(Popup);
-  app.use(PullRefresh);
+export async function importVantStyles() {
+  // 只导入组件库实际使用的 Vant 组件样式
+  await import('vant/es/button/style');
+  await import('vant/es/icon/style');
+  await import('vant/es/image/style');
+  await import('vant/es/search/style');
+  await import('vant/es/checkbox/style');
+  await import('vant/es/uploader/style');
+  await import('vant/es/list/style');
+  await import('vant/es/popup/style');
+  await import('vant/es/pull-refresh/style');
+}
+
+/**
+ * @deprecated 使用 registerVantComponents 可能导致样式缺失
+ * 建议直接在项目中导入和注册所需的 Vant 组件
+ */
+export async function registerVantComponents(app: any) {
+  const vant = await import('vant');
+
+  VANT_COMPONENTS.forEach((componentName) => {
+    const component = vant[componentName];
+    if (component) {
+      app.use(component);
+    }
+  });
 }
 
 /**
