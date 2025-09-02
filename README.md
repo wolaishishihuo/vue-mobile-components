@@ -47,6 +47,19 @@ import { Button, Icon, Image, Search, Checkbox, Uploader, List, Popup, PullRefre
   .forEach(component => app.use(component));
 ```
 
+### 按需自动引入组件
+
+```typescript
+import VueMobileComponents from '@jname/vue-mobile-components';
+import '@jname/vue-mobile-components/lib/style.css';
+import 'vant/lib/index.css'; // 仍需引入Vant样式
+
+app.use(VueMobileComponents); // 自动注册所有依赖的Vant组件！
+
+// 需要关闭自动引入样式
+resolvers: [VantResolver({ importStyle: false })]
+```
+
 ### PostCSS 配置（重要）
 
 为避免样式尺寸错乱，项目的 postcss 配置应匹配组件库的设计基准：
