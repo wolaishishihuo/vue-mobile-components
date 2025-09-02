@@ -44,7 +44,8 @@
 </template>
 
 <script lang="ts" setup>
-import { onMounted } from 'vue';
+import type { Props } from './types';
+import { onMounted, toRefs } from 'vue';
 import useRefreshList from '@/hooks/useRefreshList';
 
 defineOptions({
@@ -57,17 +58,11 @@ const props = withDefaults(defineProps<Props>(), {
   immediate: true
 });
 
-interface Props {
-  extraParams?: Record<string, unknown>;
-  apiFn: (params: any) => Promise<any>;
-  immediate?: boolean;
-  disablePullRefresh?: boolean;
-  [key: string]: any;
-}
+const { extraParams } = toRefs(props);
 
 const { dataSource, state, onRefresh, onLoad, onSearch, onReset } = useRefreshList({
   api: props.apiFn,
-  extraParams: props.extraParams
+  extraParams
 });
 
 onMounted(() => {
