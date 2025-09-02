@@ -16,9 +16,6 @@ export * from './hooks';
 // 导出类型
 export * from './types';
 
-// 导出 Vant 依赖工具
-export * from './vant-deps';
-
 // 导出组件
 export { JContentCard, JImgUploader, JOrganization, JPullToRefreshList, JStepsCard, JTabs };
 
