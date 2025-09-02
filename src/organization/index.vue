@@ -234,7 +234,7 @@ watch(popupVisible, (newVal) => {
     resetState();
     clearAllSelections();
     organizationCatch.value.clear();
-    onLoad();
+    onRefresh();
   }
 });
 </script>

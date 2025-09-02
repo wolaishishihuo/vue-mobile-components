@@ -54,7 +54,7 @@ export async function registerVantComponents(app: any) {
   VANT_COMPONENTS.forEach((componentName) => {
     const component = vant[componentName];
     if (component) {
-      app.component(`Van${componentName}`, component);
+      app.use(component);
     }
   });
 }
