@@ -1,21 +1,21 @@
 <template>
-  <div class="content-card">
+  <div class="jname-content-card">
     <!-- 左侧内容 -->
-    <div class="content-card__content">
+    <div class="jname-content-card__content">
       <!-- 标题 -->
-      <div class="content-card__title">
+      <div class="jname-content-card__title">
         {{ title }}
       </div>
 
       <!-- 描述 -->
-      <div v-if="desc" class="content-card__description">
+      <div v-if="desc" class="jname-content-card__description">
         {{ desc }}
       </div>
 
       <!-- 多图模式 -->
       <div
         v-if="displayMode === 'multi'"
-        class="content-card__images"
+        class="jname-content-card__images"
       >
         <van-image
           v-for="(image, index) in images.slice(0, maxImages)"
@@ -24,17 +24,17 @@
           fit="cover"
           lazy-load
           radius="10"
-          class="content-card__image"
+          class="jname-content-card__image"
         />
       </div>
 
       <!-- 元信息 -->
-      <div v-if="meta?.tagText || meta?.timeText" class="content-card__meta">
+      <div v-if="meta?.tagText || meta?.timeText" class="jname-content-card__meta">
         <!-- 标签插槽 -->
         <slot name="tag" :tag="meta">
           <div
             v-if="meta?.tagText"
-            class="content-card__tag"
+            class="jname-content-card__tag"
             :class="`content-card__tag--${meta?.tagStatus || 'info'}`"
           >
             {{ meta.tagText }}
@@ -43,7 +43,7 @@
 
         <!-- 时间插槽 -->
         <slot name="time" :time="meta?.timeText">
-          <span v-if="meta?.timeText" class="content-card__time">
+          <span v-if="meta?.timeText" class="jname-content-card__time">
             <van-icon name="clock-o" size="16" />
             {{ meta.timeText }}
           </span>
@@ -58,7 +58,7 @@
       fit="cover"
       lazy-load
       radius="10"
-      class="content-card__image-single"
+      class="jname-content-card__image-single"
     />
   </div>
 </template>

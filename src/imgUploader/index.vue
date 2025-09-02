@@ -25,7 +25,7 @@
   </van-uploader>
 
   <!-- 错误信息 -->
-  <div v-if="errorMsg" class="upload-error">
+  <div v-if="errorMsg" class="jname-upload-error">
     {{ errorMsg }}
   </div>
 </template>
@@ -196,7 +196,7 @@ defineExpose({
 </script>
 
 <style scoped lang="less">
-.upload-error {
+.jname-upload-error {
   margin-top: 8px;
   font-size: 12px;
   color: #ee0a24;

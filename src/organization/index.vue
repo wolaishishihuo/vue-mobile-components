@@ -9,14 +9,14 @@
     close-icon-position="top-right"
     @close="handlePopupClose"
   >
-    <div class="organization-popup">
+    <div class="jname-organization-popup">
       <!-- 弹窗头部 -->
-      <div class="popup-header">
-        <h3 class="popup-title">
+      <div class="jname-popup-header">
+        <h3 class="jname-popup-title">
           {{ popupTitle }}
         </h3>
-        <div v-if="selectedCount > 0" class="header-actions">
-          <div class="selected-count">
+        <div v-if="selectedCount > 0" class="jname-header-actions">
+          <div class="jname-selected-count">
             已选择{{ selectedCount }}人
           </div>
           <van-button
@@ -29,12 +29,12 @@
       </div>
 
       <!-- 面包屑导航 -->
-      <div v-if="breadcrumbs.length > 1" class="breadcrumb-nav">
-        <div ref="breadcrumbRef" class="breadcrumb-content">
+      <div v-if="breadcrumbs.length > 1" class="jname-breadcrumb-nav">
+        <div ref="breadcrumbRef" class="jname-breadcrumb-content">
           <span
             v-for="(item, index) in breadcrumbs"
             :key="item.id || 'root'"
-            class="breadcrumb-item"
+            class="jname-breadcrumb-item"
             :class="{ active: index === breadcrumbs.length - 1 }"
             @click="handleBreadcrumbClick(index)"
           >
@@ -45,7 +45,7 @@
       </div>
 
       <!-- 搜索栏 -->
-      <div class="search-section">
+      <div class="jname-search-section">
         <van-search
           v-model="searchState.xm"
           placeholder="请输入姓名搜索"
@@ -56,7 +56,7 @@
       </div>
 
       <!-- 组织架构内容 -->
-      <div v-if="popupVisible" class="popup-content">
+      <div v-if="popupVisible" class="jname-popup-content">
         <van-list
           v-model:loading="state.loading"
           v-model:error="state.error"
@@ -68,34 +68,34 @@
           v-bind="$attrs"
           @load="onLoad"
         >
-          <div class="org-list">
-            <TransitionGroup name="list" tag="div">
+          <div class="jname-org-list">
+            <TransitionGroup name="jname-list" tag="div">
               <template v-for="item in dataSource" :key="item.id">
                 <!-- 组织机构项 -->
                 <div
                   v-if="item.isParent"
-                  class="org-item"
+                  class="jname-org-item"
                   @click="handleOrganizationNavigation(item)"
                 >
-                  <div class="item-content">
-                    <div class="org-info">
-                      <van-icon name="friends-o" class="org-icon" />
-                      <span class="org-name">{{ item.name }}</span>
+                  <div class="jname-item-content">
+                    <div class="jname-org-info">
+                      <van-icon name="friends-o" class="jname-org-icon" />
+                      <span class="jname-org-name">{{ item.name }}</span>
                     </div>
-                    <van-icon name="arrow" class="arrow-icon" />
+                    <van-icon name="arrow" class="jname-arrow-icon" />
                   </div>
                 </div>
 
                 <!-- 人员项 -->
-                <div v-else class="person-item" @click="handlePersonSelection(item)">
-                  <div class="item-content">
-                    <div class="person-info">
-                      <van-icon name="contact" class="person-icon" />
-                      <div class="person-details">
-                        <div class="person-name">
+                <div v-else class="jname-person-item" @click="handlePersonSelection(item)">
+                  <div class="jname-item-content">
+                    <div class="jname-person-info">
+                      <van-icon name="contact" class="jname-person-icon" />
+                      <div class="jname-person-details">
+                        <div class="jname-person-name">
                           {{ item.xm }}
                         </div>
-                        <div class="person-id">
+                        <div class="jname-person-id">
                           {{ item.xgh }}
                         </div>
                       </div>
@@ -113,7 +113,7 @@
       </div>
 
       <!-- 弹窗底部操作 -->
-      <div class="popup-footer">
+      <div class="jname-popup-footer">
         <van-button size="large" @click="handlePopupCancel">
           取消
         </van-button>
