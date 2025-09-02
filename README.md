@@ -21,14 +21,59 @@ pnpm add @jname/vue-mobile-components
 import VueMobileComponents from '@jname/vue-mobile-components';
 import '@jname/vue-mobile-components/lib/style.css';
 
+// 必须手动注册 Vant 或使用全局引入
+import Vant from 'vant';
+import 'vant/lib/index.css';
+
 app.use(VueMobileComponents);
+app.use(Vant); // 全局注册 Vant
 ```
 
-### 按需引入
+### 按需引入 + 自动导入
 
 ```typescript
-import { JTabs, JPullToRefreshList } from '@jname/vue-mobile-components';
+// 1. 引入组件库和工具函数
+import { JTabs, JPullToRefreshList, registerVantComponents } from '@jname/vue-mobile-components';
 import '@jname/vue-mobile-components/lib/style.css';
+
+// 2. 自动注册所有依赖的 Vant 组件 (推荐)
+await registerVantComponents(app);
+
+// 3. vite.config.ts 配置自动导入
+import Components from 'unplugin-vue-components/vite'
+import { VantResolver } from '@vant/auto-import-resolver'
+
+export default defineConfig({
+  plugins: [
+    Components({
+      resolvers: [VantResolver()]
+    })
+  ]
+})
+```
+
+### 手动引入方式
+
+```typescript
+// 手动导入所需的 Vant 组件和函数
+import {
+  Button, Icon, Image, Search, Checkbox,
+  Uploader, List, Popup, PullRefresh,
+  showToast, showImagePreview
+} from 'vant';
+
+// 注册组件
+app.component('VanButton', Button);
+app.component('VanIcon', Icon);
+app.component('VanImage', Image);
+app.component('VanSearch', Search);
+app.component('VanCheckbox', Checkbox);
+app.component('VanUploader', Uploader);
+app.component('VanList', List);
+app.component('VanPopup', Popup);
+app.component('VanPullRefresh', PullRefresh);
+
+// 函数 showToast, showImagePreview 可直接使用
 ```
 
 ## 组件列表
