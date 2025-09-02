@@ -28,11 +28,21 @@ const components = [JStepsCard, JTabs, JContentCard, JImgUploader, JPullToRefres
 // 依赖的Vant组件列表
 const vantComponents = [Button, Icon, Image, Search, Checkbox, Uploader, List, Popup, PullRefresh];
 
+// 检查组件是否已注册的工具函数
+const isComponentRegistered = (app: App, componentName: string): boolean => {
+  // 检查全局组件是否已注册
+  return !!(app._context?.components?.[componentName] || app.config?.globalProperties?.[componentName]);
+};
+
 // 定义安装函数
 const install = (app: App) => {
-  // 自动注册依赖的Vant组件
+  // 智能注册依赖的Vant组件
   vantComponents.forEach((component) => {
-    app.use(component);
+    // 检查组件是否已经注册，避免重复注册
+    const componentName = component.name || (component as any).__name;
+    if (componentName && !isComponentRegistered(app, componentName)) {
+      app.use(component);
+    }
   });
 
   // 注册自己的组件
