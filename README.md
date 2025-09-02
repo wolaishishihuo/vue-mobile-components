@@ -19,33 +19,30 @@ pnpm add @jname/vue-mobile-components
 
 ## 使用
 
-### ⚠️ 重要：必须注册 Vant 组件
+### ✨ 开箱即用：自动注册依赖
 
-本组件库依赖以下 Vant 组件，使用前**必须在项目中注册**：
-`Button`, `Icon`, `Image`, `Search`, `Checkbox`, `Uploader`, `List`, `Popup`, `PullRefresh`
+本组件库**已内置自动注册**所依赖的 Vant 组件，无需手动注册！
+依赖的 Vant 组件：`Button`, `Icon`, `Image`, `Search`, `Checkbox`, `Uploader`, `List`, `Popup`, `PullRefresh`
 
-### 方案1：全量引入（推荐）
+### 简单使用
 
 ```typescript
 import VueMobileComponents from '@jname/vue-mobile-components';
 import '@jname/vue-mobile-components/lib/style.css';
-import Vant from 'vant';
-import 'vant/lib/index.css';
+import 'vant/lib/index.css'; // 仍需引入Vant样式
 
-app.use(VueMobileComponents);
-app.use(Vant);
+app.use(VueMobileComponents); // 自动注册所有依赖的Vant组件！
 ```
 
-### 方案2：按需引入
+### 按需引入组件
 
 ```typescript
 import { JTabs, JOrganization } from '@jname/vue-mobile-components';
 import '@jname/vue-mobile-components/lib/style.css';
-
-// 注册组件库依赖的 Vant 组件
-import { Button, Icon, Image, Search, Checkbox, Uploader, List, Popup, PullRefresh } from 'vant';
 import 'vant/lib/index.css';
 
+// 注意：按需引入时，Vant组件不会自动注册，需要手动注册
+import { Button, Icon, Image, Search, Checkbox, Uploader, List, Popup, PullRefresh } from 'vant';
 [Button, Icon, Image, Search, Checkbox, Uploader, List, Popup, PullRefresh]
   .forEach(component => app.use(component));
 ```
