@@ -1,4 +1,4 @@
-import type { ApiConfig } from '../api';
+import type { ApiConfig } from '../types';
 import { ref } from 'vue';
 import { createOrganizationApi } from '../api';
 

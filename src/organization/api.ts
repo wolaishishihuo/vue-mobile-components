@@ -1,9 +1,4 @@
-import type { Organization, Personnel } from './types';
-
-export interface ApiConfig {
-  baseUrl: string;
-  getToken: () => string;
-}
+import type { ApiConfig, Organization, Personnel } from './types';
 
 /**
  * 创建 API 实例

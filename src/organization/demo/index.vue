@@ -179,8 +179,7 @@
 </template>
 
 <script setup lang="ts">
-import type { ApiConfig } from '../api';
-import type { PersonnelItem } from '../types';
+import type { ApiConfig, PersonnelItem } from '../types';
 import { closeToast, showFailToast, showLoadingToast, showSuccessToast, showToast } from 'vant';
 
 import { ref } from 'vue';

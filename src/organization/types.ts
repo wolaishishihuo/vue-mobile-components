@@ -34,16 +34,18 @@ export interface PersonnelItem extends Personnel {
  */
 export type OrganizationPickerItem = Organization | PersonnelItem;
 
+export interface ApiConfig {
+  baseUrl: string;
+  getToken: () => string;
+}
+
 export interface Props {
   /** 是否支持多选 */
   multiple?: boolean;
   /** 最大选择数量 */
   maxSelected?: number;
   /** API配置 */
-  apiConfig: {
-    baseUrl: string;
-    getToken: () => string;
-  };
+  apiConfig: ApiConfig;
   /** 弹窗显示状态 */
   modelValue?: boolean;
   /** 弹窗标题 */
