@@ -13,6 +13,10 @@ pnpm add @jname/vue-mobile-components
 - Vant 4.0+
 - @vueuse/core 13.0+
 
+**⚠️ 设计基准说明**
+- 本组件库基于 **375px** 设计稿开发（与 Vant 4.x 保持一致）
+- 项目使用时，请确保 postcss 转换配置匹配此基准
+
 ## 使用
 
 ### ⚠️ 重要：必须注册 Vant 组件
@@ -44,6 +48,28 @@ import 'vant/lib/index.css';
 
 [Button, Icon, Image, Search, Checkbox, Uploader, List, Popup, PullRefresh]
   .forEach(component => app.use(component));
+```
+
+### PostCSS 配置（重要）
+
+为避免样式尺寸错乱，项目的 postcss 配置应匹配组件库的设计基准：
+
+```javascript
+// postcss.config.js
+export default {
+  plugins: {
+    'postcss-mobile-forever': {
+      viewportWidth: (file) => {
+        // 组件库和 vant 都按 375px 基准转换
+        if (file.includes('vant') || file.includes('@jname/vue-mobile-components')) {
+          return 375;
+        }
+        // 项目自己的代码按实际设计稿基准
+        return 750; // 根据你的设计稿调整
+      }
+    }
+  }
+};
 ```
 
 ## 组件列表
