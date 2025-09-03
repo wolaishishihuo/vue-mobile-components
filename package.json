@@ -56,7 +56,6 @@
     "prepublish": "pnpm lint && pnpm typecheck && pnpm build"
   },
   "peerDependencies": {
-    "@vueuse/core": "^13.0.0",
     "vant": "^4.0.0",
     "vue": "^3.3.0"
   },

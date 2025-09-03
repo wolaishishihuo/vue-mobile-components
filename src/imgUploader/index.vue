@@ -1,5 +1,5 @@
 <template>
-  <van-uploader
+  <Uploader
     v-model="innerFileList"
     v-bind="$attrs"
     :max-count="maxCount"
@@ -22,7 +22,7 @@
     <template v-for="name in computedSlots" :key="name" #[name]="slotData">
       <slot :name="name" v-bind="slotData || {}" />
     </template>
-  </van-uploader>
+  </Uploader>
 
   <!-- 错误信息 -->
   <div v-if="errorMsg" class="jname-upload-error">
@@ -33,8 +33,13 @@
 <script setup lang="ts">
 import type { ImagePreviewOptions, UploaderFileListItem } from 'vant';
 import type { UploaderProps } from './types';
-import { showImagePreview, showToast } from 'vant';
+import { showImagePreview, showToast, Uploader } from 'vant';
 import { computed, ref, useSlots, watch } from 'vue';
+
+defineOptions({
+  name: 'JImgUploader',
+  inheritAttrs: false
+});
 
 // 定义默认属性值
 const props = withDefaults(defineProps<UploaderProps>(), {

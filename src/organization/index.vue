@@ -1,5 +1,5 @@
 <template>
-  <van-popup
+  <Popup
     v-model:show="popupVisible"
     position="bottom"
     :style="{ height: popupHeight }"
@@ -19,12 +19,12 @@
           <div class="jname-selected-count">
             已选择{{ selectedCount }}人
           </div>
-          <van-button
+          <Button
             size="mini"
             @click="clearAllSelections"
           >
             清空
-          </van-button>
+          </Button>
         </div>
       </div>
 
@@ -39,14 +39,14 @@
             @click="handleBreadcrumbClick(index)"
           >
             {{ item.name }}
-            <van-icon v-if="index < breadcrumbs.length - 1" name="arrow" />
+            <Icon v-if="index < breadcrumbs.length - 1" name="arrow" />
           </span>
         </div>
       </div>
 
       <!-- 搜索栏 -->
       <div class="jname-search-section">
-        <van-search
+        <Search
           v-model="searchState.xm"
           placeholder="请输入姓名搜索"
           clearable
@@ -57,7 +57,7 @@
 
       <!-- 组织架构内容 -->
       <div v-if="popupVisible" class="jname-popup-content">
-        <van-list
+        <List
           v-model:loading="state.loading"
           v-model:error="state.error"
           :finished="state.finished"
@@ -79,10 +79,10 @@
                 >
                   <div class="jname-item-content">
                     <div class="jname-org-info">
-                      <van-icon name="friends-o" class="jname-org-icon" />
+                      <Icon name="friends-o" class="jname-org-icon" />
                       <span class="jname-org-name">{{ item.name }}</span>
                     </div>
-                    <van-icon name="arrow" class="jname-arrow-icon" />
+                    <Icon name="arrow" class="jname-arrow-icon" />
                   </div>
                 </div>
 
@@ -90,7 +90,7 @@
                 <div v-else class="jname-person-item" @click="handlePersonSelection(item)">
                   <div class="jname-item-content">
                     <div class="jname-person-info">
-                      <van-icon name="contact" class="jname-person-icon" />
+                      <Icon name="contact" class="jname-person-icon" />
                       <div class="jname-person-details">
                         <div class="jname-person-name">
                           {{ item.xm }}
@@ -100,7 +100,7 @@
                         </div>
                       </div>
                     </div>
-                    <van-checkbox
+                    <Checkbox
                       :model-value="item.checked"
                       :disabled="isPersonDisabled(item)"
                     />
@@ -109,29 +109,30 @@
               </template>
             </TransitionGroup>
           </div>
-        </van-list>
+        </List>
       </div>
 
       <!-- 弹窗底部操作 -->
       <div class="jname-popup-footer">
-        <van-button size="large" @click="handlePopupCancel">
+        <Button size="large" @click="handlePopupCancel">
           取消
-        </van-button>
-        <van-button
+        </Button>
+        <Button
           type="primary"
           size="large"
           :disabled="selectedCount === 0"
           @click="handlePopupConfirm"
         >
           确定 {{ selectedCount > 0 ? `(${selectedCount})` : '' }}
-        </van-button>
+        </Button>
       </div>
     </div>
-  </van-popup>
+  </Popup>
 </template>
 
 <script setup lang="ts">
 import type { Emits, PersonnelItem, Props } from './types';
+import { Button, Checkbox, Icon, List, Popup, Search } from 'vant';
 import { computed, watch } from 'vue';
 import { useRefreshList } from '@/hooks';
 import {
@@ -141,7 +142,8 @@ import {
 } from './composables';
 
 defineOptions({
-  name: 'JOrganization'
+  name: 'JOrganization',
+  inheritAttrs: false
 });
 
 const props = withDefaults(defineProps<Props>(), {

@@ -17,7 +17,7 @@
         v-if="displayMode === 'multi'"
         class="jname-content-card__images"
       >
-        <van-image
+        <Image
           v-for="(image, index) in images.slice(0, maxImages)"
           :key="index"
           :src="image"
@@ -44,7 +44,7 @@
         <!-- 时间插槽 -->
         <slot name="time" :time="meta?.timeText">
           <span v-if="meta?.timeText" class="jname-content-card__time">
-            <van-icon name="clock-o" size="16" />
+            <Icon name="clock-o" size="16" />
             {{ meta.timeText }}
           </span>
         </slot>
@@ -52,7 +52,7 @@
     </div>
 
     <!-- 右侧单图 -->
-    <van-image
+    <Image
       v-if="displayMode === 'single'"
       :src="images[0]"
       fit="cover"
@@ -65,10 +65,12 @@
 
 <script setup lang="ts">
 import type { ContentCardProps } from './types';
+import { Icon, Image } from 'vant';
 import { computed } from 'vue';
 
 defineOptions({
-  name: 'JContentCard'
+  name: 'JContentCard',
+  inheritAttrs: false
 });
 
 const props = withDefaults(defineProps<ContentCardProps>(), {

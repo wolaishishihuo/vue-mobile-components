@@ -21,6 +21,11 @@
 import type { PropType } from 'vue';
 import type { TabItem } from './types';
 
+defineOptions({
+  name: 'JTabs',
+  inheritAttrs: false
+});
+
 defineProps({
   modelValue: {
     type: String,

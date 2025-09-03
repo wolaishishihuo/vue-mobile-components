@@ -19,46 +19,45 @@ pnpm add @jname/vue-mobile-components
 
 ## 使用
 
-### ✨ 开箱即用：自动注册依赖
-
-本组件库**已内置自动注册**所依赖的 Vant 组件，无需手动注册！
-依赖的 Vant 组件：`Button`, `Icon`, `Image`, `Search`, `Checkbox`, `Uploader`, `List`, `Popup`, `PullRefresh`
-
-### 简单使用
+### 全局引入
 
 ```typescript
 import VueMobileComponents from '@jname/vue-mobile-components';
 import '@jname/vue-mobile-components/lib/style.css';
-import 'vant/lib/index.css'; // 仍需引入Vant样式
 
-app.use(VueMobileComponents); // 自动注册所有依赖的Vant组件！
+// 注册所有组件
+app.use(VueMobileComponents);
 ```
 
-### 按需引入组件
+### 按需引入
 
 ```typescript
 import { JTabs, JOrganization } from '@jname/vue-mobile-components';
 import '@jname/vue-mobile-components/lib/style.css';
-import 'vant/lib/index.css';
 
-// 注意：按需引入时，Vant组件不会自动注册，需要手动注册
-import { Button, Icon, Image, Search, Checkbox, Uploader, List, Popup, PullRefresh } from 'vant';
-[Button, Icon, Image, Search, Checkbox, Uploader, List, Popup, PullRefresh]
-  .forEach(component => app.use(component));
+// 注册需要的组件
+app.component('JTabs', JTabs);
+app.component('JOrganization', JOrganization);
 ```
 
-### 按需自动引入组件
+### 与 auto-import 配合使用
+
+本组件库内部使用的 Vant 组件已采用 PascalCase 形式（如 `<Button>`、`<Popup>` 等），完美支持 `unplugin-auto-import` 和 `unplugin-vue-components` 自动导入：
 
 ```typescript
-import VueMobileComponents from '@jname/vue-mobile-components';
-import '@jname/vue-mobile-components/lib/style.css';
-import 'vant/lib/index.css'; // 仍需引入Vant样式
+// vite.config.ts
+import { VantResolver } from 'unplugin-vue-components/resolvers';
 
-app.use(VueMobileComponents); // 自动注册所有依赖的Vant组件！
-
-// 需要关闭自动引入样式
-resolvers: [VantResolver({ importStyle: false })]
+export default {
+  plugins: [
+    Components({
+      resolvers: [VantResolver()]
+    })
+  ]
+}
 ```
+
+用户项目使用时，Vant 组件会自动被识别和导入，无需手动注册。
 
 ### PostCSS 配置（重要）
 

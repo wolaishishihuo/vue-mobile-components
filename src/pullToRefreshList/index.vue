@@ -1,5 +1,5 @@
 <template>
-  <van-pull-refresh
+  <PullRefresh
     v-if="!disablePullRefresh"
     v-model="state.isLoading"
     pulling-text="下拉释放刷新"
@@ -8,7 +8,7 @@
     v-bind="$attrs"
     @refresh="onRefresh"
   >
-    <van-list
+    <List
       v-model:loading="state.loading"
       v-model:error="state.error"
       :finished="state.finished"
@@ -22,10 +22,10 @@
       <template #default>
         <slot :data="dataSource || []" />
       </template>
-    </van-list>
-  </van-pull-refresh>
+    </List>
+  </PullRefresh>
 
-  <van-list
+  <List
     v-if="disablePullRefresh"
     v-model:loading="state.loading"
     v-model:error="state.error"
@@ -40,16 +40,18 @@
     <template #default>
       <slot :data="dataSource || []" />
     </template>
-  </van-list>
+  </List>
 </template>
 
 <script lang="ts" setup>
 import type { Props } from './types';
+import { List, PullRefresh } from 'vant';
 import { onMounted, toRefs } from 'vue';
 import useRefreshList from '@/hooks/useRefreshList';
 
 defineOptions({
-  name: 'JPullToRefreshList'
+  name: 'JPullToRefreshList',
+  inheritAttrs: false
 });
 
 const props = withDefaults(defineProps<Props>(), {
