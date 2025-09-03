@@ -11,7 +11,6 @@ pnpm add @jname/vue-mobile-components
 **依赖要求**
 - Vue 3.3+
 - Vant 4.0+
-- @vueuse/core 13.0+
 
 **⚠️ 设计基准说明**
 - 本组件库基于 **375px** 设计稿开发（与 Vant 4.x 保持一致）
@@ -51,13 +50,18 @@ import { VantResolver } from 'unplugin-vue-components/resolvers';
 export default {
   plugins: [
     Components({
-      resolvers: [VantResolver()]
+      resolvers: [
+        VantResolver()  // 默认 importStyle: true，会自动引入组件样式
+      ]
     })
   ]
 }
 ```
 
-用户项目使用时，Vant 组件会自动被识别和导入，无需手动注册。
+**样式引入说明**：
+- 组件库**不包含** Vant 样式，需要用户项目自行处理
+- 使用 `VantResolver()` 时会自动按需引入样式（推荐）
+- 如果已全量引入 Vant 样式，可设置 `VantResolver({ importStyle: false })`
 
 ### PostCSS 配置（重要）
 
