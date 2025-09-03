@@ -72,7 +72,7 @@ const slots = useSlots();
 // 计算可用的插槽，排除已在模板中单独处理的插槽
 const computedSlots = computed(() => {
   const slotNames = Object.keys(slots);
-  return slotNames.filter(name => name !== 'default' && name !== 'preview-cover');
+  return slotNames.filter(name => name !== 'preview-cover');
 });
 
 // 内部状态
