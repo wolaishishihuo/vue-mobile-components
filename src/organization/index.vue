@@ -69,7 +69,7 @@
           @load="onLoad"
         >
           <div class="jname-org-list">
-            <TransitionGroup name="jname-list" tag="div">
+            <TransitionGroup v-if="dataSource.length > 0" name="jname-list" tag="div">
               <template v-for="item in dataSource" :key="item.id">
                 <!-- 组织机构项 -->
                 <div
