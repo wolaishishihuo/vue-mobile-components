@@ -1,5 +1,36 @@
 import type { ImagePreviewOptions, UploaderFileListItem } from 'vant';
 
+// 定义压缩选项接口，避免强依赖 compressorjs 类型
+interface CompressorOptions {
+  strict?: boolean;
+  checkOrientation?: boolean;
+  retainExif?: boolean;
+  maxWidth?: number;
+  maxHeight?: number;
+  minWidth?: number;
+  minHeight?: number;
+  width?: number;
+  height?: number;
+  resize?: 'contain' | 'cover' | 'none';
+  quality?: number;
+  mimeType?: string;
+  convertTypes?: string | string[];
+  convertSize?: number;
+  beforeDraw?: (context: CanvasRenderingContext2D, canvas: HTMLCanvasElement) => void;
+  drew?: (context: CanvasRenderingContext2D, canvas: HTMLCanvasElement) => void;
+  success?: (file: File | Blob) => void;
+  error?: (error: Error) => void;
+}
+
+// 压缩配置接口
+export interface CompressionOptions extends Partial<CompressorOptions> {
+  /**
+   * 是否启用压缩
+   * @default false
+   */
+  enabled?: boolean;
+}
+
 // 定义组件属性
 export interface UploaderProps {
   /**
@@ -72,4 +103,9 @@ export interface UploaderProps {
    * @default "文件格式不正确，请上传{formats}格式的图片"
    */
   formatErrorMsg?: string;
+
+  /**
+   * 图片压缩配置
+   */
+  compression?: CompressionOptions;
 }

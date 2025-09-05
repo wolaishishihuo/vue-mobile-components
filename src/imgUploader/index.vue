@@ -53,7 +53,8 @@ const props = withDefaults(defineProps<UploaderProps>(), {
   preview: true,
   uploadText: '上传图片',
   previewOptions: () => ({}),
-  formatErrorMsg: ''
+  formatErrorMsg: '',
+  compression: () => ({ enabled: false })
 });
 
 // 定义事件
@@ -118,11 +119,51 @@ watch(
 );
 
 /**
- * 在读取文件前验证格式
- * @param file 文件对象
- * @returns 是否通过验证
+ * 压缩单个图片文件
+ * @param file 原始文件
+ * @returns Promise<File> 压缩后的文件
  */
-const handleBeforeRead = (file: File | File[]) => {
+const compressImage = async (file: File): Promise<File> => {
+  try {
+    // 动态导入 compressorjs，只有在需要时才加载
+    const { default: Compressor } = await import('compressorjs');
+    // 默认压缩选项
+    const defaultOptions = {
+      quality: 0.8,
+      maxWidth: 1920,
+      maxHeight: 1920,
+      convertSize: 1000000 // 1MB以上才转换格式
+    };
+
+    // 合并用户配置和默认配置
+    const options = { ...defaultOptions, ...props.compression };
+
+    return new Promise<File>((resolve) => {
+      new Compressor(file, {
+        ...options,
+        success: (compressedFile) => {
+          resolve(compressedFile as File);
+        },
+        error: (err) => {
+          console.warn('图片压缩失败，使用原图:', err);
+          resolve(file); // 压缩失败时使用原图
+        }
+      });
+    });
+  } catch (error) {
+    // 如果 compressorjs 未安装，给出友好的错误提示
+    console.error('压缩功能需要安装 compressorjs 依赖包。请运行: npm install compressorjs 或 pnpm add compressorjs');
+    console.warn('compressorjs 未找到，使用原图:', error);
+    return file; // 无法压缩时使用原图
+  }
+};
+
+/**
+ * 在读取文件前验证格式和压缩
+ * @param file 文件对象
+ * @returns 验证结果和处理后的文件
+ */
+const handleBeforeRead = async (file: File | File[]) => {
   errorMsg.value = '';
   const files = Array.isArray(file) ? file : [file];
 
@@ -135,13 +176,18 @@ const handleBeforeRead = (file: File | File[]) => {
       errorMsg.value = formattedFormatErrorMsg.value;
       showToast(errorMsg.value);
       emit('error', { file, message: errorMsg.value });
-      return false;
+      return;
     }
   }
 
-  // 验证通过
+  if (props.compression?.enabled) {
+    const compressedFiles = await Promise.all(files.map(compressImage));
+    emit('success', compressedFiles.length === 1 ? compressedFiles[0] : compressedFiles);
+    return compressedFiles.length === 1 ? compressedFiles[0] : compressedFiles;
+  }
+
   emit('success', files.length === 1 ? files[0] : files);
-  return true;
+  return files.length === 1 ? files[0] : files;
 };
 
 /**

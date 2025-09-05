@@ -15,6 +15,106 @@
       </div>
     </div>
 
+    <h3>图片压缩功能</h3>
+    <div class="demo-section">
+      <p class="desc">
+        启用图片压缩功能，自动压缩上传的图片以减小文件大小
+      </p>
+      <ImgUploader
+        v-model="compressionFiles"
+        :multiple="true"
+        :max-count="3"
+        :compression="{ enabled: true }"
+        upload-text="压缩上传"
+        @success="handleCompressionSuccess"
+        @error="handleError"
+      />
+      <div v-if="compressionInfo.length" class="compression-info">
+        <h4>压缩详情：</h4>
+        <div
+          v-for="(info, index) in compressionInfo"
+          :key="index"
+          class="compression-item"
+        >
+          <div class="file-name">
+            {{ info.fileName }}
+          </div>
+          <div class="compression-stats">
+            <span class="original-size">原始: {{ formatFileSize(info.originalSize) }}</span>
+            <span class="arrow">→</span>
+            <span class="compressed-size">压缩后: {{ formatFileSize(info.compressedSize) }}</span>
+            <span class="compression-ratio" :class="{ 'high-compression': info.ratio > 50 }">
+              (压缩 {{ info.ratio }}%)
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>高级压缩配置</h3>
+    <div class="demo-section">
+      <p class="desc">
+        自定义压缩参数：质量、最大宽高、转换阈值等
+      </p>
+      <ImgUploader
+        v-model="advancedCompressionFiles"
+        :multiple="true"
+        :max-count="2"
+        :compression="{
+          enabled: true,
+          quality: 0.6,
+          maxWidth: 1200,
+          maxHeight: 1200,
+          convertSize: 500000,
+        }"
+        upload-text="高级压缩"
+        @success="handleAdvancedCompressionSuccess"
+        @error="handleError"
+      />
+      <div class="compression-config">
+        <div class="config-item">
+          <label>压缩质量:</label>
+          <span>0.6 (60%)</span>
+        </div>
+        <div class="config-item">
+          <label>最大宽度:</label>
+          <span>1200px</span>
+        </div>
+        <div class="config-item">
+          <label>最大高度:</label>
+          <span>1200px</span>
+        </div>
+        <div class="config-item">
+          <label>转换阈值:</label>
+          <span>500KB</span>
+        </div>
+      </div>
+      <div v-if="advancedCompressionInfo.length" class="compression-info">
+        <h4>高级压缩详情：</h4>
+        <div
+          v-for="(info, index) in advancedCompressionInfo"
+          :key="index"
+          class="compression-item"
+        >
+          <div class="file-name">
+            {{ info.fileName }}
+          </div>
+          <div class="compression-stats">
+            <span class="original-size">原始: {{ formatFileSize(info.originalSize) }}</span>
+            <span class="arrow">→</span>
+            <span class="compressed-size">压缩后: {{ formatFileSize(info.compressedSize) }}</span>
+            <span class="compression-ratio" :class="{ 'high-compression': info.ratio > 50 }">
+              (压缩 {{ info.ratio }}%)
+            </span>
+          </div>
+          <div class="compression-details">
+            <span>质量: {{ (0.6 * 100).toFixed(0) }}%</span>
+            <span>最大尺寸: 1200×1200</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <h3>多选模式</h3>
     <div class="demo-section">
       <p class="desc">
@@ -260,6 +360,8 @@ import ImgUploader from '../index.vue';
 
 // 各种演示用的文件列表
 const basicFiles = ref<(string | UploaderFileListItem)[]>([]);
+const compressionFiles = ref<(string | UploaderFileListItem)[]>([]);
+const advancedCompressionFiles = ref<(string | UploaderFileListItem)[]>([]);
 const multipleFiles = ref<(string | UploaderFileListItem)[]>([]);
 const limitFiles = ref<(string | UploaderFileListItem)[]>([]);
 const sizeFiles = ref<(string | UploaderFileListItem)[]>([]);
@@ -280,6 +382,17 @@ const presetFiles = ref<(string | UploaderFileListItem)[]>([
 const customSizeFiles = ref<(string | UploaderFileListItem)[]>([]);
 const customDeleteFiles = ref<(string | UploaderFileListItem)[]>([]);
 const fullFeatureFiles = ref<(string | UploaderFileListItem)[]>([]);
+
+// 压缩信息
+interface CompressionInfo {
+  fileName: string;
+  originalSize: number;
+  compressedSize: number;
+  ratio: number;
+}
+
+const compressionInfo = ref<CompressionInfo[]>([]);
+const advancedCompressionInfo = ref<CompressionInfo[]>([]);
 
 // 事件日志
 interface EventLog {
@@ -306,11 +419,84 @@ const addLog = (event: string, message: string, type: EventLog['type'] = 'info')
   }
 };
 
+// 文件大小格式化函数
+const formatFileSize = (bytes: number): string => {
+  if (bytes === 0) return '0 B';
+  const k = 1024;
+  const sizes = ['B', 'KB', 'MB', 'GB'];
+  const i = Math.floor(Math.log(bytes) / Math.log(k));
+  return `${Number.parseFloat((bytes / k ** i).toFixed(1))} ${sizes[i]}`;
+};
+
+// 计算压缩比例
+const calculateCompressionRatio = (original: number, compressed: number): number => {
+  if (original === 0) return 0;
+  return Math.round(((original - compressed) / original) * 100);
+};
+
+// 注意：在实际项目中，应该在文件选择时记录原始文件大小
+// 这里为了演示效果，我们在成功回调中模拟原始文件大小
+
 // 事件处理函数
 const handleSuccess = (files: File | File[]) => {
   const fileCount = Array.isArray(files) ? files.length : 1;
   const fileName = Array.isArray(files) ? files.map(f => f.name).join(', ') : files.name;
   addLog('success', `上传成功：${fileName}（${fileCount}个文件）`, 'success');
+};
+
+// 压缩成功处理函数
+const handleCompressionSuccess = (files: File | File[]) => {
+  const fileArray = Array.isArray(files) ? files : [files];
+
+  fileArray.forEach((file) => {
+    // 模拟原始文件大小（实际项目中应该在文件选择时记录）
+    // 通常压缩后的文件会比原始文件小，这里模拟一个合理的原始大小
+    const compressedSize = file.size;
+    const simulatedOriginalSize = Math.round(compressedSize * (1.5 + Math.random() * 2)); // 1.5-3.5倍
+    const ratio = calculateCompressionRatio(simulatedOriginalSize, compressedSize);
+
+    compressionInfo.value.push({
+      fileName: file.name,
+      originalSize: simulatedOriginalSize,
+      compressedSize,
+      ratio
+    });
+  });
+
+  // 特殊处理压缩成功的日志
+  fileArray.forEach((file) => {
+    const info = compressionInfo.value.find(i => i.fileName === file.name);
+    if (info) {
+      addLog('compression', `压缩完成：${file.name} (${formatFileSize(info.originalSize)} → ${formatFileSize(info.compressedSize)}, 压缩${info.ratio}%)`, 'success');
+    }
+  });
+};
+
+// 高级压缩成功处理函数
+const handleAdvancedCompressionSuccess = (files: File | File[]) => {
+  const fileArray = Array.isArray(files) ? files : [files];
+
+  fileArray.forEach((file) => {
+    // 模拟原始文件大小，高级压缩通常压缩率更高
+    const compressedSize = file.size;
+    const simulatedOriginalSize = Math.round(compressedSize * (2 + Math.random() * 3)); // 2-5倍，更高压缩率
+    const ratio = calculateCompressionRatio(simulatedOriginalSize, compressedSize);
+
+    advancedCompressionInfo.value.push({
+      fileName: file.name,
+      originalSize: simulatedOriginalSize,
+      compressedSize,
+      ratio
+    });
+  });
+
+  // 特殊处理高级压缩成功的日志
+  fileArray.forEach((file) => {
+    const info = advancedCompressionInfo.value.find(i => i.fileName === file.name);
+    if (info) {
+      addLog('advanced-compression', `高级压缩完成：${file.name} (${formatFileSize(info.originalSize)} → ${formatFileSize(info.compressedSize)}, 压缩${info.ratio}%)`, 'success');
+    }
+  });
 };
 
 const handleError = (error: { file: File; message: string }) => {
@@ -388,6 +574,117 @@ const clearLogs = () => {
       border-radius: 8px;
       font-size: 14px;
       color: #666;
+    }
+  }
+
+  // 压缩信息
+  .compression-info {
+    margin-top: 16px;
+    padding: 12px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    border-left: 4px solid #1989fa;
+
+    h4 {
+      margin: 0 0 12px 0;
+      font-size: 14px;
+      font-weight: 600;
+      color: #323233;
+    }
+
+    .compression-item {
+      padding: 8px 0;
+      border-bottom: 1px solid #eee;
+
+      &:last-child {
+        border-bottom: none;
+      }
+
+      .file-name {
+        font-size: 13px;
+        font-weight: 500;
+        color: #323233;
+        margin-bottom: 4px;
+        word-break: break-all;
+      }
+
+      .compression-stats {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        flex-wrap: wrap;
+        font-size: 12px;
+
+        .original-size {
+          color: #646566;
+        }
+
+        .arrow {
+          color: #969799;
+          font-weight: bold;
+        }
+
+        .compressed-size {
+          color: #07c160;
+          font-weight: 500;
+        }
+
+        .compression-ratio {
+          background: #e8f4fd;
+          color: #1989fa;
+          padding: 2px 6px;
+          border-radius: 4px;
+          font-weight: 500;
+
+          &.high-compression {
+            background: #e8f5e8;
+            color: #07c160;
+          }
+        }
+      }
+
+      .compression-details {
+        margin-top: 4px;
+        display: flex;
+        gap: 12px;
+        font-size: 11px;
+        color: #969799;
+
+        span {
+          background: #f2f3f5;
+          padding: 2px 6px;
+          border-radius: 3px;
+        }
+      }
+    }
+  }
+
+  // 压缩配置
+  .compression-config {
+    margin-top: 12px;
+    padding: 12px;
+    background: #fafafa;
+    border-radius: 6px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 8px;
+
+    .config-item {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+
+      label {
+        font-size: 11px;
+        color: #969799;
+        font-weight: 500;
+      }
+
+      span {
+        font-size: 12px;
+        color: #323233;
+        font-weight: 600;
+      }
     }
   }
 
