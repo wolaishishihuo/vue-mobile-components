@@ -106,7 +106,7 @@ const useRefreshList = <T extends object>({
     dataSource.value = [];
     state.finished = false;
     state.error = false;
-
+    state.loading = true;
     onLoad();
   };
 
