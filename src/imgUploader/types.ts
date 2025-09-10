@@ -37,7 +37,7 @@ export interface UploaderProps {
    * 已上传的文件列表
    * 支持字符串数组 ['url1', 'url2'] 或对象数组 [{url: 'url1'}, {url: 'url2'}]
    */
-  modelValue: (string | UploaderFileListItem)[];
+  modelValue?: (string | UploaderFileListItem)[];
 
   /**
    * 是否多选图片
