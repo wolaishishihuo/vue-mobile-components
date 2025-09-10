@@ -35,7 +35,7 @@
           <div
             v-if="meta?.tagText"
             class="jname-content-card__tag"
-            :class="`content-card__tag--${meta?.tagStatus || 'info'}`"
+            :class="`jname-content-card__tag--${meta?.tagStatus || 'info'}`"
           >
             {{ meta.tagText }}
           </div>
