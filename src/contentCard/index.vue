@@ -69,8 +69,7 @@ import { Icon, Image } from 'vant';
 import { computed } from 'vue';
 
 defineOptions({
-  name: 'JContentCard',
-  inheritAttrs: false
+  name: 'JContentCard'
 });
 
 const props = withDefaults(defineProps<ContentCardProps>(), {

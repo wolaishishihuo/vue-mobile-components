@@ -37,8 +37,7 @@ import { showImagePreview, showToast, Uploader } from 'vant';
 import { computed, ref, useSlots, watch } from 'vue';
 
 defineOptions({
-  name: 'JImgUploader',
-  inheritAttrs: false
+  name: 'JImgUploader'
 });
 
 // 定义默认属性值

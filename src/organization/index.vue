@@ -142,8 +142,7 @@ import {
 } from './composables';
 
 defineOptions({
-  name: 'JOrganization',
-  inheritAttrs: false
+  name: 'JOrganization'
 });
 
 const props = withDefaults(defineProps<Props>(), {

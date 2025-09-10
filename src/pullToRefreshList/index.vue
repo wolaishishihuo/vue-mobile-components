@@ -50,8 +50,7 @@ import { onMounted, toRefs } from 'vue';
 import useRefreshList from '@/hooks/useRefreshList';
 
 defineOptions({
-  name: 'JPullToRefreshList',
-  inheritAttrs: false
+  name: 'JPullToRefreshList'
 });
 
 const props = withDefaults(defineProps<Props>(), {

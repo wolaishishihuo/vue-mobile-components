@@ -22,8 +22,7 @@ import type { PropType } from 'vue';
 import type { TabItem } from './types';
 
 defineOptions({
-  name: 'JTabs',
-  inheritAttrs: false
+  name: 'JTabs'
 });
 
 defineProps({
