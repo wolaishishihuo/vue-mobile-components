@@ -29,9 +29,12 @@
       </div>
 
       <!-- 元信息 -->
-      <div v-if="meta?.tagText || meta?.timeText" class="jname-content-card__meta">
-        <!-- 标签插槽 -->
-        <slot name="tag" :tag="meta">
+      <div
+        v-if="$slots.meta || meta?.tagText || meta?.timeText"
+        class="jname-content-card__meta"
+      >
+        <!-- 元信息插槽 -->
+        <slot name="meta">
           <div
             v-if="meta?.tagText"
             class="jname-content-card__tag"
@@ -39,14 +42,10 @@
           >
             {{ meta.tagText }}
           </div>
-        </slot>
-
-        <!-- 时间插槽 -->
-        <slot name="time" :time="meta?.timeText">
-          <span v-if="meta?.timeText" class="jname-content-card__time">
+          <div v-if="meta?.timeText" class="jname-content-card__time">
             <Icon name="clock-o" size="16" />
             {{ meta.timeText }}
-          </span>
+          </div>
         </slot>
       </div>
     </div>
