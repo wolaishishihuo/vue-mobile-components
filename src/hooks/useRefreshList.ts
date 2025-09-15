@@ -1,5 +1,5 @@
 import type { Ref } from 'vue';
-import { computed, reactive, ref } from 'vue';
+import { computed, reactive, ref, unref } from 'vue';
 
 const useRefreshList = <T extends object>({
   api,
@@ -41,7 +41,8 @@ const useRefreshList = <T extends object>({
   const getList = async () => {
     try {
       state.totalParam = {};
-      Object.assign(state.totalParam, extraParams.value, state.searchParam, pageParam.value);
+      // 使用 unref 确保获取到最新的 extraParams 值，避免响应式更新延迟导致的数据同步问题
+      Object.assign(state.totalParam, unref(extraParams), state.searchParam, pageParam.value);
       const { data } = await api(state.totalParam);
       const { records, total } = data;
       state.pageable.totalRow = total;

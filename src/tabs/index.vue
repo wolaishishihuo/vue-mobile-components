@@ -38,8 +38,8 @@ defineProps({
 
 const emit = defineEmits(['change', 'update:modelValue']);
 const handleClick = (value: string) => {
-  emit('change', value);
   emit('update:modelValue', value);
+  emit('change', value);
 };
 </script>
 
