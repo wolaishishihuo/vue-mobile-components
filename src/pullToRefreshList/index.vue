@@ -46,7 +46,7 @@
 <script lang="ts" setup>
 import type { Props } from './types';
 import { List, PullRefresh } from 'vant';
-import { onMounted, toRefs } from 'vue';
+import { computed, onMounted } from 'vue';
 import useRefreshList from '@/hooks/useRefreshList';
 
 defineOptions({
@@ -59,7 +59,8 @@ const props = withDefaults(defineProps<Props>(), {
   immediate: true
 });
 
-const { extraParams } = toRefs(props);
+// 使用 computed 确保实时获取最新的 extraParams，避免 toRefs 的异步更新延迟
+const extraParams = computed(() => props.extraParams);
 
 const { dataSource, state, onRefresh, onLoad, onSearch, onReset } = useRefreshList({
   api: props.apiFn,
