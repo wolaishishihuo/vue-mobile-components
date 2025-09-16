@@ -4,16 +4,48 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vue Mobile Components - 开发预览</title>
+    <title>Vue Mobile Components - Monorepo</title>
   </head>
   <body>
     <div id="app">
-      <div style="padding: 20px; text-align: center">
-        <h1>Vue Mobile Components</h1>
-        <p>组件库开发预览页面</p>
-        <p>组件开发完成后，可以在此页面预览组件效果</p>
+      <div style="padding: 40px; text-align: center; font-family: Arial, sans-serif">
+        <h1 style="color: #1989fa; margin-bottom: 20px">Vue Mobile Components</h1>
+        <h2 style="color: #666; font-weight: normal; margin-bottom: 30px">Monorepo 架构组件库</h2>
+
+        <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin: 20px 0">
+          <h3 style="color: #333; margin-bottom: 15px">📦 包结构</h3>
+          <div style="text-align: left; max-width: 400px; margin: 0 auto">
+            <p><strong>@jname/core</strong> - 核心工具和类型</p>
+            <p><strong>@jname/components</strong> - 基础 UI 组件</p>
+            <p><strong>@jname/business</strong> - 业务组件</p>
+            <p><strong>playground</strong> - 开发调试环境</p>
+          </div>
+        </div>
+
+        <div style="margin: 30px 0">
+          <h3 style="color: #333; margin-bottom: 15px">🚀 快速开始</h3>
+          <div
+            style="
+              background: #263238;
+              color: #fff;
+              padding: 15px;
+              border-radius: 6px;
+              font-family: 'Courier New', monospace;
+              text-align: left;
+            "
+          >
+            <div>pnpm dev # 启动开发环境</div>
+            <div>pnpm build # 构建所有包</div>
+            <div>pnpm typecheck # 类型检查</div>
+            <div>pnpm lint # 代码检查</div>
+          </div>
+        </div>
+
+        <div style="margin-top: 30px; padding: 20px; background: #e8f5e8; border-radius: 8px; color: #52c41a">
+          <p style="margin: 0; font-weight: bold">✅ Monorepo 架构迁移完成</p>
+          <p style="margin: 5px 0 0 0; font-size: 14px">请使用 playground 进行组件开发和调试</p>
+        </div>
       </div>
     </div>
-    <script type="module" src="/src/main.ts"></script>
   </body>
 </html>

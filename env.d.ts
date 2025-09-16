@@ -1,12 +1,13 @@
 /// <reference types="vite/client" />
 
-declare module '*.vue' {
-  import type { DefineComponent } from 'vue';
+// Less 文件类型声明
+declare module '*.less' {
+  const content: string;
+  export default content;
+}
 
-  const component: DefineComponent<
-    Record<string, never>,
-    Record<string, never>,
-    any
-  >;
-  export default component;
+// CSS 文件类型声明
+declare module '*.css' {
+  const content: string;
+  export default content;
 }

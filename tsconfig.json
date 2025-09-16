@@ -8,7 +8,10 @@
     "module": "esnext",
     "moduleResolution": "Bundler",
     "paths": {
-      "@/*": ["src/*"]
+      "@jname/core": ["packages/core/index.ts"],
+      "@jname/components": ["packages/components/index.ts"],
+      "@jname/business": ["packages/business/index.ts"],
+      "@jname/themes": ["packages/themes/index.ts"]
     },
     "types": [
       "node",
@@ -29,8 +32,14 @@
     "skipLibCheck": true
   },
   "include": [
-    "src/**/*.ts",
-    "src/**/*.vue",
-    "src/**/*.d.ts"
+    "packages/**/*.ts",
+    "packages/**/*.vue",
+    "packages/**/*.d.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "**/dist",
+    "**/lib",
+    "**/demo/**"
   ]
 }

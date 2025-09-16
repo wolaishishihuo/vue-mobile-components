@@ -1,0 +1,19 @@
+{
+  "name": "@jname/themes",
+  "version": "1.0.0",
+  "description": "Vue Mobile Components - Theme System",
+  "author": "Jname",
+  "license": "MIT",
+  "exports": {
+    ".": "./index.ts",
+    "./default": "./src/default/index.less",
+    "./dark": "./src/dark/index.less",
+    "./variables": "./src/default/variables.less"
+  },
+  "files": [
+    "src"
+  ],
+  "publishConfig": {
+    "access": "public"
+  }
+}

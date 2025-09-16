@@ -1,0 +1,43 @@
+{
+  "name": "@jname/business",
+  "version": "1.0.0",
+  "description": "Vue Mobile Components - Business components",
+  "author": "Jname",
+  "license": "MIT",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.umd.js"
+    },
+    "./style.css": "./dist/style.css"
+  },
+  "main": "./dist/index.umd.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "vite build",
+    "build:watch": "vite build --watch",
+    "typecheck": "vue-tsc --noEmit",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "clean": "rm -rf dist",
+    "release": "pnpm build && npm publish --access public"
+  },
+  "peerDependencies": {
+    "compressorjs": "^1.2.1",
+    "vant": "^4.0.0",
+    "vue": "^3.3.0"
+  },
+  "dependencies": {
+    "@jname/components": "workspace:*",
+    "@jname/core": "workspace:*"
+  },
+  "devDependencies": {},
+  "publishConfig": {
+    "access": "public"
+  }
+}

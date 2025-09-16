@@ -1,0 +1,25 @@
+{
+  "name": "@jname/playground",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Vue Mobile Components - Development playground",
+  "author": "Jname",
+  "license": "MIT",
+  "scripts": {
+    "dev": "vite",
+    "build": "vue-tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "typecheck": "vue-tsc --noEmit",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
+  },
+  "dependencies": {
+    "@jname/business": "workspace:*",
+    "@jname/components": "workspace:*",
+    "@jname/core": "workspace:*",
+    "@jname/themes": "workspace:*",
+    "vant": "^4.0.0",
+    "vue": "^3.3.0"
+  },
+  "devDependencies": {}
+}
