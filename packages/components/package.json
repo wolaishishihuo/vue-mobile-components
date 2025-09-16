@@ -28,7 +28,6 @@
     "release": "pnpm build && npm publish --access public"
   },
   "peerDependencies": {
-    "vant": "^4.0.0",
     "vue": "^3.3.0"
   },
   "dependencies": {

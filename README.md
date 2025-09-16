@@ -13,14 +13,14 @@
 ## 📦 安装
 
 ```bash
-# 基础组件包（包含主题变量）
-npm install @jname/components
+# 基础组件包
+npm install @jname/components @jname/themes
 
-# 业务组件包（可选）
-npm install @jname/business
+# 业务组件包
+npm install @jname/business @jname/themes
 
-# 核心工具包（可选）
-npm install @jname/core
+# 完整安装
+npm install @jname/components @jname/business @jname/themes @jname/core
 ```
 
 ## 🚀 快速开始
@@ -29,7 +29,9 @@ npm install @jname/core
 
 ```typescript
 // main.ts
-import '@jname/components/style.css';  // 包含组件样式和主题变量
+import '@jname/themes/variables';      // 主题变量（必需）
+import '@jname/components/style.css';  // 基础组件样式
+import '@jname/business/style.css';    // 业务组件样式（按需）
 ```
 
 ### 2. 导入组件

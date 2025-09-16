@@ -17,15 +17,14 @@
         v-if="displayMode === 'multi'"
         class="j-content-card__images"
       >
-        <Image
+        <img
           v-for="(image, index) in images.slice(0, maxImages)"
           :key="index"
           :src="image"
-          fit="cover"
-          :lazy-load="lazyLoad"
-          radius="10"
+          :loading="lazyLoad ? 'lazy' : 'eager'"
           class="j-content-card__image"
-        />
+          alt=""
+        >
       </div>
 
       <!-- 元信息 -->
@@ -43,7 +42,7 @@
             {{ meta.tagText }}
           </div>
           <div v-if="meta?.timeText" class="j-content-card__time">
-            <Icon name="clock-o" size="16" />
+            <span class="j-content-card__time-icon">🕐</span>
             {{ meta.timeText }}
           </div>
         </slot>
@@ -51,20 +50,18 @@
     </div>
 
     <!-- 右侧单图 -->
-    <Image
+    <img
       v-if="displayMode === 'single'"
       :src="images[0]"
-      fit="cover"
-      :lazy-load="lazyLoad"
-      radius="10"
+      :loading="lazyLoad ? 'lazy' : 'eager'"
       class="j-content-card__image-single"
-    />
+      alt=""
+    >
   </div>
 </template>
 
 <script setup lang="ts">
 import type { ContentCardProps } from './types';
-import { Icon, Image } from 'vant';
 import { computed } from 'vue';
 
 defineOptions({
