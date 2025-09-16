@@ -100,7 +100,7 @@ body {
 
 /* Demo 预览区 */
 .demo-container {
-  width: 400px;
+  flex: 1;
   padding: 24px;
   display: flex;
   justify-content: center;
@@ -128,7 +128,7 @@ body {
 
 /* 代码示例区 */
 .code-container {
-  flex: 1;
+  width: 30vw;
   background: #fff;
   border-left: 1px solid #ebedf0;
   overflow: auto;

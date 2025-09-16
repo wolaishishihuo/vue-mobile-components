@@ -6,11 +6,8 @@
 
 <script setup lang="ts">
 import { computed } from 'vue';
-// @ts-expect-error - Demo components
 import ContentCardDemo from '../demos/ContentCardDemo.vue';
-// @ts-expect-error - Demo components
 import StepsCardDemo from '../demos/StepsCardDemo.vue';
-// @ts-expect-error - Demo components
 import TabsDemo from '../demos/TabsDemo.vue';
 
 interface Props {
@@ -38,7 +35,6 @@ const currentComponent = computed(() => {
 .demo-preview {
   width: 100%;
   height: 100%;
-  padding: 16px;
   overflow-y: auto;
   background: #f8f9fa;
 }
