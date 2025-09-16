@@ -5,10 +5,10 @@
   "author": "Jname",
   "license": "MIT",
   "exports": {
-    ".": "./index.ts",
-    "./default": "./src/default/index.less",
-    "./dark": "./src/dark/index.less",
-    "./variables": "./src/default/variables.less"
+    ".": "./src/default/index.ts",
+    "./variables": "./src/default/variables.less",
+    "./global": "./src/default/global.less",
+    "./index": "./src/default/index.less"
   },
   "files": [
     "src"

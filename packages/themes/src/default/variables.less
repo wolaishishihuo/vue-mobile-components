@@ -1,35 +1,91 @@
-// 主题变量定义
+// ===== 组件库设计变量 =====
 :root {
-  // 主要颜色
-  --j-primary-color: #4873c1;
-  --j-success-color: #4caf50;
-  --j-warning-color: #ff9800;
-  --j-error-color: #f44336;
-  --j-info-color: #2196f3;
+  // 品牌色彩
+  --j-primary: #4873c1;
+  --j-success: #4caf50;
+  --j-warning: #ff9800;
+  --j-danger: #f44336;
+  --j-info: #2196f3;
 
-  // 中性色
-  --j-text-color: #333333;
-  --j-text-color-secondary: #666666;
-  --j-text-color-disabled: #999999;
-  --j-border-color: #e0e0e0;
-  --j-background-color: #ffffff;
-  --j-background-color-light: #f5f5f5;
+  // 中性色彩
+  --j-white: #ffffff;
+  --j-black: #000000;
+  --j-gray-1: #f7f8fa;
+  --j-gray-2: #f2f3f5;
+  --j-gray-3: #ebedf0;
+  --j-gray-4: #dcdee0;
+  --j-gray-5: #c8c9cc;
+  --j-gray-6: #969799;
+  --j-gray-7: #646566;
+  --j-gray-8: #323233;
 
-  // 尺寸变量
-  --j-border-radius-small: 4px;
-  --j-border-radius-medium: 8px;
-  --j-border-radius-large: 12px;
+  // 文字色彩
+  --j-text-color: var(--j-gray-8);
+  --j-text-color-2: var(--j-gray-6);
+  --j-text-color-3: var(--j-gray-5);
+  --j-text-link: var(--j-primary);
 
-  // 字体大小
-  --j-font-size-small: 12px;
-  --j-font-size-medium: 14px;
-  --j-font-size-large: 16px;
-  --j-font-size-xlarge: 18px;
+  // 背景色彩
+  --j-background: var(--j-white);
+  --j-background-2: var(--j-gray-1);
 
-  // 间距
-  --j-spacing-xs: 4px;
-  --j-spacing-sm: 8px;
-  --j-spacing-md: 16px;
-  --j-spacing-lg: 24px;
-  --j-spacing-xl: 16px;
+  // 边框色彩
+  --j-border-color: var(--j-gray-3);
+
+  // 间距系统
+  --j-padding-base: 4px;
+  --j-padding-xs: calc(var(--j-padding-base) * 2);   // 8px
+  --j-padding-sm: calc(var(--j-padding-base) * 3);   // 12px
+  --j-padding-md: calc(var(--j-padding-base) * 4);   // 16px
+  --j-padding-lg: calc(var(--j-padding-base) * 6);   // 24px
+  --j-padding-xl: calc(var(--j-padding-base) * 8);   // 32px
+
+  // 圆角系统
+  --j-radius-sm: 2px;
+  --j-radius-md: 4px;
+  --j-radius-lg: 8px;
+  --j-radius-max: 999px;
+
+  // 字体系统
+  --j-font-size-xs: 10px;
+  --j-font-size-sm: 12px;
+  --j-font-size-md: 14px;
+  --j-font-size-lg: 16px;
+  --j-font-size-xl: 18px;
+
+  --j-font-bold: 600;
+  --j-line-height-xs: 14px;
+  --j-line-height-sm: 18px;
+  --j-line-height-md: 20px;
+  --j-line-height-lg: 22px;
+
+  // 动画
+  --j-duration-fast: 0.2s;
+  --j-duration-base: 0.3s;
+  --j-duration-slow: 0.5s;
+  --j-ease-out: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --j-ease-in: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+
+  // 阴影
+  --j-shadow-1: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --j-shadow-2: 0 2px 4px rgba(0, 0, 0, 0.1);
+  --j-shadow-3: 0 4px 8px rgba(0, 0, 0, 0.12);
+
+  // 组件特定变量
+  // Button
+  --j-button-height-sm: 30px;
+  --j-button-height-md: 40px;
+  --j-button-height-lg: 50px;
+
+  // Input
+  --j-field-height: 44px;
+
+  // 层级
+  --j-z-index-dropdown: 1000;
+  --j-z-index-sticky: 1020;
+  --j-z-index-fixed: 1030;
+  --j-z-index-modal-backdrop: 1040;
+  --j-z-index-modal: 1050;
+  --j-z-index-popover: 1060;
+  --j-z-index-tooltip: 1070;
 }

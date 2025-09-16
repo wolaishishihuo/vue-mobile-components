@@ -1,6 +1,3 @@
-// Constants
-export * from './src/constants';
-
 // Hooks
 export * from './src/hooks';
 
