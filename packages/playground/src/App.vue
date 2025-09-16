@@ -85,6 +85,7 @@ body {
 .version {
   color: #969799;
   font-size: 12px;
+  text-align: end;
 }
 
 .sidebar-nav {
