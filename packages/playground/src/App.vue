@@ -1,119 +1,158 @@
 <template>
-  <div class="mobile-app">
-    <!-- 移动端顶部导航 -->
-    <VanNavBar title="组件库演示" />
-
-    <!-- 主要内容区域 -->
-    <div class="content">
-      <!-- Tab 切换演示 -->
-      <div class="demo-section">
-        <h3>标签页组件</h3>
-        <JTabs v-model="activeTab" :tab-options="tabs" />
-        <div class="tab-content">
-          当前选中: {{ activeTab }}
+  <div class="playground">
+    <!-- 左侧导航栏 -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <h1>Vue Mobile Components</h1>
+        <div class="version">
+          v1.3.13
         </div>
       </div>
 
-      <!-- 内容卡片演示 -->
-      <div class="demo-section">
-        <h3>内容卡片组件</h3>
-        <JContentCard
-          title="重要通知"
-          desc="组件库已完成 monorepo 架构重构，请开发者及时更新使用方式"
-          :images="demoImages"
-          :meta="{ tagText: '公告', tagStatus: 'info', timeText: '刚刚' }"
-        />
+      <nav class="sidebar-nav">
+        <SidebarMenu @select="onMenuSelect" />
+      </nav>
+    </aside>
+
+    <!-- 右侧内容区域 -->
+    <main class="main-content">
+      <!-- Demo 预览区 -->
+      <div class="demo-container">
+        <div class="mobile-frame">
+          <div class="mobile-screen">
+            <DemoPreview :current-demo="currentDemo" />
+          </div>
+        </div>
       </div>
 
-      <!-- 步骤卡片演示 -->
-      <div class="demo-section">
-        <h3>步骤卡片组件</h3>
-        <JStepsCard>
-          <template #header>
-            <strong>安装组件库</strong>
-          </template>
-          <p>使用 npm 或 pnpm 安装组件库包</p>
-          <code>pnpm add @jname/components</code>
-        </JStepsCard>
-
-        <JStepsCard>
-          <template #header>
-            <strong>导入使用</strong>
-          </template>
-          <p>在项目中导入所需组件</p>
-          <code>import { JTabs } from '@jname/components'</code>
-        </JStepsCard>
+      <!-- 代码示例区 -->
+      <div class="code-container">
+        <CodeExample :current-demo="currentDemo" />
       </div>
-    </div>
+    </main>
   </div>
 </template>
 
 <script setup lang="ts">
-// 真实用户的导入方式
-import { JContentCard, JStepsCard, JTabs } from '@jname/components';
-import { NavBar as VanNavBar } from 'vant';
 import { ref } from 'vue';
+import CodeExample from './components/CodeExample.vue';
+import DemoPreview from './components/DemoPreview.vue';
+import SidebarMenu from './components/SidebarMenu.vue';
 
-const activeTab = ref('home');
+const currentDemo = ref('tabs');
 
-const tabs = ref([
-  { label: '首页', value: 'home' },
-  { label: '发现', value: 'discover' },
-  { label: '我的', value: 'mine' }
-]);
-
-const demoImages = ref([
-  'https://img.yzcdn.cn/vant/cat.jpeg'
-]);
+const onMenuSelect = (demoName: string) => {
+  currentDemo.value = demoName;
+};
 </script>
 
 <style>
-/* 模拟真实移动端应用样式 */
-body {
+* {
   margin: 0;
   padding: 0;
-  background-color: var(--j-background-2);
+  box-sizing: border-box;
 }
 
-.mobile-app {
-  max-width: 375px;
-  margin: 0 auto;
-  background-color: var(--j-background);
-  min-height: 100vh;
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: #f8f9fa;
 }
 
-.content {
-  padding: var(--j-padding-md);
+.playground {
+  display: flex;
+  height: 100vh;
 }
 
-.demo-section {
-  margin-bottom: var(--j-padding-xl);
-  background: var(--j-background);
-  border-radius: var(--j-radius-lg);
-  padding: var(--j-padding-md);
-  box-shadow: var(--j-shadow-1);
+/* 左侧导航栏 */
+.sidebar {
+  width: 280px;
+  background: #fff;
+  border-right: 1px solid #ebedf0;
+  overflow-y: auto;
 }
 
-.demo-section h3 {
-  margin: 0 0 var(--j-padding-md) 0;
-  color: var(--j-text-color);
-  font-size: var(--j-font-size-lg);
-  font-weight: var(--j-font-bold);
+.sidebar-header {
+  padding: 24px 20px;
+  border-bottom: 1px solid #ebedf0;
 }
 
-.tab-content {
-  margin-top: var(--j-padding-md);
-  padding: var(--j-padding-md);
-  background: var(--j-background-2);
-  border-radius: var(--j-radius-md);
-  color: var(--j-text-color-2);
+.sidebar-header h1 {
+  font-size: 20px;
+  color: #323233;
+  margin-bottom: 8px;
 }
 
-code {
-  background: var(--j-gray-1);
-  padding: 2px 6px;
-  border-radius: var(--j-radius-sm);
-  font-family: 'Monaco', 'Consolas', monospace;
-  font-size: var(--j-font-size-sm);
+.version {
+  color: #969799;
+  font-size: 12px;
+}
+
+.sidebar-nav {
+  padding: 16px 0;
+}
+
+/* 右侧内容区 */
+.main-content {
+  flex: 1;
+  display: flex;
+  overflow: hidden;
+}
+
+/* Demo 预览区 */
+.demo-container {
+  width: 400px;
+  padding: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  background: #f8f9fa;
+}
+
+.mobile-frame {
+  width: 375px;
+  height: 667px;
+  background: #000;
+  border-radius: 24px;
+  padding: 8px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.mobile-screen {
+  width: 100%;
+  height: 100%;
+  background: #fff;
+  border-radius: 16px;
+  overflow: hidden;
+  position: relative;
+}
+
+/* 代码示例区 */
+.code-container {
+  flex: 1;
+  background: #fff;
+  border-left: 1px solid #ebedf0;
+  overflow: auto;
+}
+
+/* 响应式设计 */
+@media (max-width: 1200px) {
+  .code-container {
+    display: none;
+  }
+
+  .demo-container {
+    width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    width: 240px;
+  }
+
+  .mobile-frame {
+    width: 320px;
+    height: 568px;
+  }
 }
 </style>
