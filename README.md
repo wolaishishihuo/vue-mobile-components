@@ -13,17 +13,14 @@
 ## 📦 安装
 
 ```bash
-# 安装核心包
-npm install @jname/core
-
-# 安装基础组件
+# 基础组件包（包含主题变量）
 npm install @jname/components
 
-# 安装业务组件
+# 业务组件包（可选）
 npm install @jname/business
 
-# 安装主题
-npm install @jname/themes
+# 核心工具包（可选）
+npm install @jname/core
 ```
 
 ## 🚀 快速开始
@@ -32,8 +29,7 @@ npm install @jname/themes
 
 ```typescript
 // main.ts
-import '@jname/themes/variables';
-import '@jname/components/style.css';
+import '@jname/components/style.css';  // 包含组件样式和主题变量
 ```
 
 ### 2. 导入组件
@@ -68,12 +64,27 @@ import { JOrganization } from '@jname/business';
 
 ## 🎨 主题定制
 
-```less
-// 自定义主题变量
+### 简单定制（推荐）
+
+```css
+/* 直接覆盖 CSS 变量 */
 :root {
   --j-primary: #your-color;
   --j-success: #your-color;
 }
+```
+
+### 高级定制
+
+如需深度定制主题，可安装主题包：
+
+```bash
+npm install @jname/themes
+```
+
+```typescript
+// 导入完整主题系统
+import '@jname/themes/variables';
 ```
 
 ## 🔗 相关链接
