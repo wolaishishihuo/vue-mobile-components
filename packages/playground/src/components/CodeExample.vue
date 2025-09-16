@@ -20,6 +20,9 @@
 
 <script setup lang="ts">
 import { computed, ref } from 'vue';
+import { contentCardExamples } from '../code-examples/content-card';
+import { stepsCardExamples } from '../code-examples/steps-card';
+import { tabsExamples } from '../code-examples/tabs';
 
 interface Props {
   currentDemo: string;
@@ -31,50 +34,14 @@ const activeTab = ref('vue');
 
 const tabs = [
   { key: 'vue', label: 'Vue' },
-  { key: 'import', label: 'Import' },
   { key: 'api', label: 'API' }
 ];
 
-// 代码示例
+// 代码示例映射
 const codeExamples = {
-  tabs: {
-    vue: `<template>
-  <JTabs v-model="activeTab" :tab-options="tabs" />
-</template>
-
-<script setup>
-import { JTabs } from '@jname/components';
-import { ref } from 'vue';
-
-const activeTab = ref('home');
-const tabs = ref([
-  { label: '首页', value: 'home' },
-  { label: '发现', value: 'discover' }
-]);
-<\/script>`,
-    import: `// 安装
-npm install @jname/components
-
-// 导入
-import { JTabs } from '@jname/components';
-import '@jname/components/style.css';
-import '@jname/themes/variables';`,
-    api: `interface TabItem {
-  label: string;
-  value: string;
-  count?: number;
-}
-
-interface TabsProps {
-  modelValue: string;
-  tabOptions: TabItem[];
-}
-
-interface TabsEmits {
-  'update:modelValue': [value: string];
-  'change': [value: string];
-}`
-  }
+  'tabs': tabsExamples,
+  'content-card': contentCardExamples,
+  'steps-card': stepsCardExamples
 };
 
 const currentCode = computed(() => {
