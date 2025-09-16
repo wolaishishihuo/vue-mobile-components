@@ -1,0 +1,45 @@
+.j-tabs {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  gap: var(--j-padding-lg);
+  overflow-x: auto;
+  white-space: nowrap;
+  padding: var(--j-padding-xs) 0;
+
+  &__item {
+    position: relative;
+    cursor: pointer;
+    font-size: var(--j-font-size-md);
+    color: var(--j-text-color-2);
+    transition: all var(--j-duration-base) var(--j-ease-out);
+
+    &--active {
+      color: var(--j-text-color);
+      font-size: var(--j-font-size-lg);
+      font-weight: var(--j-font-bold);
+    }
+  }
+
+  &__count {
+    margin-left: var(--j-padding-base);
+  }
+
+  &__indicator {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 6px;
+    width: 100%;
+    border-radius: var(--j-radius-lg);
+    background-color: var(--j-primary);
+    opacity: 0;
+    transition: all var(--j-duration-base) var(--j-ease-out);
+
+    &--active {
+      opacity: 0.23;
+    }
+  }
+}

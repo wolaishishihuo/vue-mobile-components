@@ -1,17 +1,17 @@
 <template>
-  <div class="jname-tabs-container">
+  <div class="j-tabs">
     <div
       v-for="item in tabOptions"
       :key="item.value"
-      class="jname-tab-item"
-      :class="{ active: modelValue === item.value }"
+      class="j-tabs__item"
+      :class="{ 'j-tabs__item--active': modelValue === item.value }"
       @click="handleClick(item.value)"
     >
       {{ item.label }}
-      <span v-if="!!item.count" class="jname-tab-count">({{ item.count }})</span>
+      <span v-if="!!item.count" class="j-tabs__count">({{ item.count }})</span>
       <div
-        class="jname-tab-indicator"
-        :class="{ active: modelValue === item.value }"
+        class="j-tabs__indicator"
+        :class="{ 'j-tabs__indicator--active': modelValue === item.value }"
       />
     </div>
   </div>

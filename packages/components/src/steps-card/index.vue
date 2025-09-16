@@ -1,34 +1,34 @@
 <template>
-  <div class="jname-steps-card">
+  <div class="j-steps-card">
     <!-- 左侧时间轴 -->
-    <div class="jname-steps-card__timeline">
+    <div class="j-steps-card__timeline">
       <!-- 点和线的容器 -->
-      <div class="jname-steps-card__timeline-container">
+      <div class="j-steps-card__timeline-container">
         <!-- 双点结构 -->
-        <div class="jname-steps-card__dot-container">
+        <div class="j-steps-card__dot-container">
           <!-- 外层大点 -->
-          <div class="jname-steps-card__outer-dot" />
+          <div class="j-steps-card__outer-dot" />
           <!-- 内层小点 -->
-          <div class="jname-steps-card__inner-dot" />
+          <div class="j-steps-card__inner-dot" />
         </div>
         <!-- 连接线 -->
         <div
           v-if="hasBodyContent"
-          class="jname-steps-card__line"
-          :class="[bodyHeight > 0 ? 'jname-steps-card__line--visible' : 'jname-steps-card__line--hidden']"
+          class="j-steps-card__line"
+          :class="[bodyHeight > 0 ? 'j-steps-card__line--visible' : 'j-steps-card__line--hidden']"
         />
       </div>
     </div>
 
     <!-- 右侧内容 -->
-    <div class="jname-steps-card__content">
+    <div class="j-steps-card__content">
       <!-- 头部内容 -->
-      <div v-if="slots.header" class="jname-steps-card__content-header">
+      <div v-if="slots.header" class="j-steps-card__content-header">
         <slot name="header" />
       </div>
 
       <!-- 内容区域 -->
-      <div v-if="slots.default" ref="bodyRef" class="jname-steps-card__content-body">
+      <div v-if="slots.default" ref="bodyRef" class="j-steps-card__content-body">
         <slot />
       </div>
     </div>

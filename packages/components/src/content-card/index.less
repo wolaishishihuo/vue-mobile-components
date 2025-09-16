@@ -1,0 +1,107 @@
+.j-content-card {
+  position: relative;
+  background: var(--j-background);
+  border-bottom: 1px solid var(--j-border-color);
+  padding: var(--j-padding-xs);
+  transition: background-color var(--j-duration-fast) var(--j-ease-out);
+  display: flex;
+  gap: var(--j-padding-xs);
+
+  &__content {
+    min-width: 0;
+    flex: 1;
+    font-size: var(--j-font-size-lg);
+  }
+
+  &__title {
+    margin-bottom: var(--j-padding-sm);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: var(--j-text-color);
+    font-weight: var(--j-font-bold);
+    font-size: inherit;
+  }
+
+  &__description {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    line-clamp: 2;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: var(--j-text-color-2);
+    font-size: var(--j-font-size-md);
+    line-height: var(--j-line-height-md);
+    margin-bottom: var(--j-padding-sm);
+  }
+
+  &__images {
+    display: flex;
+    gap: var(--j-padding-md);
+    margin: var(--j-padding-xs) 0;
+  }
+
+  &__image {
+    height: 68px;
+    width: 98px;
+    flex: 1;
+    border-radius: var(--j-radius-md);
+  }
+
+  &__image-single {
+    margin-left: var(--j-padding-xs);
+    height: 68px;
+    width: 98px;
+    flex-shrink: 0;
+    border-radius: var(--j-radius-md);
+  }
+
+  &__meta {
+    margin-top: var(--j-padding-md);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__tag {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--j-radius-lg);
+    padding: var(--j-padding-base) var(--j-padding-sm);
+    font-size: var(--j-font-size-xs);
+    background-color: var(--j-gray-2);
+    color: var(--j-text-color-2);
+    border: 1px solid transparent;
+
+    // 预设标签状态样式
+    &--success {
+      background-color: var(--j-gray-1);
+      color: var(--j-success);
+    }
+
+    &--warning {
+      background-color: var(--j-gray-1);
+      color: var(--j-warning);
+    }
+
+    &--danger {
+      background-color: var(--j-gray-1);
+      color: var(--j-danger);
+    }
+
+    &--info {
+      background-color: var(--j-gray-1);
+      color: var(--j-info);
+    }
+  }
+
+  &__time {
+    display: flex;
+    align-items: center;
+    gap: var(--j-padding-sm);
+    font-size: var(--j-font-size-sm);
+    color: var(--j-text-color-2);
+  }
+}
