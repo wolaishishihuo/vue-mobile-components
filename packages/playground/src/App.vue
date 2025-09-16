@@ -3,7 +3,7 @@
     <!-- 左侧导航栏 -->
     <aside class="sidebar">
       <div class="sidebar-header">
-        <h1>Vue Mobile Components</h1>
+        <h1>@jname/components</h1>
         <div class="version">
           v1.3.13
         </div>
