@@ -23,4 +23,6 @@ export interface ContentCardProps {
   meta?: MetaInfo;
   /** 最大显示图片数量 */
   maxImages?: number;
+  /** 懒加载 */
+  lazyLoad?: boolean;
 }

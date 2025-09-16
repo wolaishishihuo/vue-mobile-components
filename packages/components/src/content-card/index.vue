@@ -22,7 +22,7 @@
           :key="index"
           :src="image"
           fit="cover"
-          lazy-load
+          :lazy-load="lazyLoad"
           radius="10"
           class="j-content-card__image"
         />
@@ -55,7 +55,7 @@
       v-if="displayMode === 'single'"
       :src="images[0]"
       fit="cover"
-      lazy-load
+      :lazy-load="lazyLoad"
       radius="10"
       class="j-content-card__image-single"
     />
@@ -72,7 +72,8 @@ defineOptions({
 });
 
 const props = withDefaults(defineProps<ContentCardProps>(), {
-  maxImages: 3
+  maxImages: 3,
+  lazyLoad: false
 });
 
 // 根据图片数量自动判断显示模式

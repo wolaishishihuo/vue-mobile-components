@@ -44,12 +44,12 @@ import DemoBlock from '../components/DemoBlock.vue';
 import MobilePage from '../components/MobilePage.vue';
 
 const singleImage = ref([
-  'https://img.yzcdn.cn/vant/cat.jpeg'
+  'https://picsum.photos/400/300?random=1'
 ]);
 
 const multipleImages = ref([
-  'https://img.yzcdn.cn/vant/cat.jpeg',
-  'https://img.yzcdn.cn/vant/tree.jpg',
-  'https://img.yzcdn.cn/vant/apple-1.jpg'
+  'https://picsum.photos/400/300?random=1',
+  'https://picsum.photos/400/300?random=2',
+  'https://picsum.photos/400/300?random=3'
 ]);
 </script>
