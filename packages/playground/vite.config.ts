@@ -6,10 +6,16 @@ export default defineConfig({
   plugins: [vue()],
   resolve: {
     alias: {
-      // 直接引用源码，获取最新修改
-      '@jname/core': resolve(__dirname, '../core/index.ts'),
-      '@jname/components': resolve(__dirname, '../components/index.ts'),
-      '@jname/business': resolve(__dirname, '../business/index.ts')
+      // 生产环境使用构建后的包，开发环境使用源码
+      '@jname/core': process.env.NODE_ENV === 'production'
+        ? resolve(__dirname, '../core/dist/index.mjs')
+        : resolve(__dirname, '../core/index.ts'),
+      '@jname/components': process.env.NODE_ENV === 'production'
+        ? resolve(__dirname, '../components/dist/index.mjs')
+        : resolve(__dirname, '../components/index.ts'),
+      '@jname/business': process.env.NODE_ENV === 'production'
+        ? resolve(__dirname, '../business/dist/index.mjs')
+        : resolve(__dirname, '../business/index.ts')
     }
   },
   css: {
