@@ -56,3 +56,4 @@ pids
 
 # Husky
 .husky/_/
+.vercel

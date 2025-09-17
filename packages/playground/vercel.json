@@ -1,9 +1,8 @@
 {
-  "version": 2,
-  "buildCommand": "cd packages/playground && pnpm build",
-  "outputDirectory": "packages/playground/dist",
+  "buildCommand": "pnpm build",
+  "outputDirectory": "dist",
   "installCommand": "pnpm install --frozen-lockfile",
-  "framework": null,
+  "framework": "vite",
   "routes": [
     {
       "src": "/assets/(.*)",
