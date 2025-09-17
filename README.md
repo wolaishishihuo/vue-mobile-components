@@ -91,7 +91,7 @@ import '@jname/themes/variables';
 
 ## 🔗 相关链接
 
-- [在线演示](https://dist-mwv8afpqn-js-projects-f116ef79.vercel.app) - Playground 展示
+- [在线演示](https://vue-mobile-components-playground.vercel.app/) - Playground 展示
 - [发布指南](./docs/发布指南.md) - 开发者发布说明
 
 ## 📄 License
