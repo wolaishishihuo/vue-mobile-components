@@ -1,7 +1,7 @@
 {
   "version": 2,
   "name": "vue-mobile-components-playground",
-  "buildCommand": "pnpm install && pnpm --filter @jname/core build && pnpm --filter @jname/components build && pnpm --filter @jname/business build && pnpm --filter playground build",
+  "buildCommand": "pnpm install && pnpm --filter playground build",
   "outputDirectory": "packages/playground/dist",
   "installCommand": "pnpm install",
   "framework": null,
