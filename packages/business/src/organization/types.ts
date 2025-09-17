@@ -1,40 +1,45 @@
-// 人员接口
-export interface Personnel {
+/**
+ * 基础人员信息接口
+ */
+export interface OrganizationPersonnel {
   id: string;
-  xgh: string;
-  xm: string;
+  xgh: string; // 学工号
+  xm: string; // 姓名
   [key: string]: any;
 }
 
 /**
- * 组织架构数据类型
+ * 组织架构节点数据类型
  */
-export interface Organization {
+export interface OrganizationNode {
   id: number;
-  dwh?: string;
+  dwh?: string; // 单位号
   name: string;
   isParent?: boolean;
-  children?: Organization[];
+  children?: OrganizationNode[];
   checked?: boolean;
 }
 
 /**
- * 扩展人员类型
+ * 组织架构人员项（包含扩展字段）
  */
-export interface PersonnelItem extends Personnel {
+export interface OrganizationPersonnelItem extends OrganizationPersonnel {
   checked?: boolean;
-  dwh?: string; // 添加组织代码字段，用于组织结构项
-  isParent?: boolean; // 添加是否为父节点标识
-  name?: string; // 添加名称字段，组织结构项使用
+  dwh?: string; // 组织代码字段
+  isParent?: boolean; // 是否为父节点标识
+  name?: string; // 名称字段，用于组织结构项
   [key: string]: any;
 }
 
 /**
  * 组织架构和人员混合类型
  */
-export type OrganizationPickerItem = Organization | PersonnelItem;
+export type OrganizationPickerItem = OrganizationNode | OrganizationPersonnelItem;
 
-export interface ApiConfig {
+/**
+ * API 配置接口
+ */
+export interface OrganizationApiConfig {
   baseUrl: string;
   getToken: () => string;
 }
@@ -45,7 +50,7 @@ export interface OrganizationProps {
   /** 最大选择数量 */
   maxSelected?: number;
   /** API配置 */
-  apiConfig: ApiConfig;
+  apiConfig: OrganizationApiConfig;
   /** 弹窗显示状态 */
   modelValue?: boolean;
   /** 弹窗标题 */
@@ -56,11 +61,12 @@ export interface OrganizationProps {
 
 export interface OrganizationEmits {
   (e: 'update:modelValue', value: boolean): void;
-  (e: 'confirm', personnel: PersonnelItem[]): void;
+  (e: 'confirm', personnel: OrganizationPersonnelItem[]): void;
   (e: 'cancel'): void;
   (e: 'close'): void;
 }
 
-// 保持向后兼容
-export interface Props extends OrganizationProps {}
-export interface Emits extends OrganizationEmits {}
+// 内部使用的简化类型别名
+export type Props = OrganizationProps;
+export type Emits = OrganizationEmits;
+export type PersonnelItem = OrganizationPersonnelItem;

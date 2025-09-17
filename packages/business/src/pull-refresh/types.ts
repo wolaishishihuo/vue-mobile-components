@@ -12,6 +12,3 @@ export interface PullToRefreshListEmits {
   refresh: () => void;
   load: () => void;
 }
-
-// 保持向后兼容
-export interface Props extends PullToRefreshListProps {}

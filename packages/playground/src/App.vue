@@ -12,6 +12,31 @@
       <nav class="sidebar-nav">
         <SidebarMenu @select="onMenuSelect" />
       </nav>
+
+      <!-- API 配置区域 -->
+      <div class="api-config-section">
+        <div class="config-header">
+          <h3>API 配置</h3>
+        </div>
+        <div class="config-form">
+          <VanField
+            v-model="apiConfig.baseUrl"
+            label="API 地址"
+            placeholder="请输入 API 基础地址"
+          />
+          <VanField
+            v-model="apiConfig.token"
+            label="Token"
+            placeholder="请输入访问令牌"
+            type="password"
+          />
+          <div class="config-status">
+            <VanTag :type="isApiConfigValid ? 'success' : 'warning'">
+              {{ isApiConfigValid ? '已配置' : '未配置' }}
+            </VanTag>
+          </div>
+        </div>
+      </div>
     </aside>
 
     <!-- 右侧内容区域 -->
@@ -20,7 +45,7 @@
       <div class="demo-container">
         <div class="mobile-frame">
           <div class="mobile-screen">
-            <DemoPreview :current-demo="currentDemo" />
+            <DemoPreview :current-demo="currentDemo" :api-config="computedApiConfig" />
           </div>
         </div>
       </div>
@@ -34,12 +59,30 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { Field as VanField, Tag as VanTag } from 'vant';
+import { computed, reactive, ref } from 'vue';
 import CodeExample from './components/CodeExample.vue';
 import DemoPreview from './components/DemoPreview.vue';
 import SidebarMenu from './components/SidebarMenu.vue';
 
 const currentDemo = ref('tabs');
+
+// API 配置状态
+const apiConfig = reactive({
+  baseUrl: 'https://dev.psctech.net:18100/electronicscreen/api',
+  token: ''
+});
+
+// 检查 API 配置是否有效
+const isApiConfigValid = computed(() => {
+  return apiConfig.baseUrl.trim() !== '' && apiConfig.token.trim() !== '';
+});
+
+// 计算后的 API 配置对象
+const computedApiConfig = computed(() => ({
+  baseUrl: apiConfig.baseUrl,
+  getToken: () => apiConfig.token
+}));
 
 const onMenuSelect = (demoName: string) => {
   currentDemo.value = demoName;
@@ -68,7 +111,9 @@ body {
   width: 280px;
   background: #fff;
   border-right: 1px solid #ebedf0;
-  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
 }
 
 .sidebar-header {
@@ -90,6 +135,37 @@ body {
 
 .sidebar-nav {
   padding: 16px 0;
+  flex: 1;
+  overflow-y: auto;
+}
+
+/* API 配置区域 */
+.api-config-section {
+  border-top: 1px solid #ebedf0;
+  padding: 16px 20px;
+  background: #f8f9fa;
+}
+
+.config-header {
+  margin-bottom: 12px;
+}
+
+.config-header h3 {
+  font-size: 14px;
+  color: #323233;
+  font-weight: 600;
+}
+
+.config-form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.config-status {
+  display: flex;
+  justify-content: center;
+  margin-top: 8px;
 }
 
 /* 右侧内容区 */
@@ -110,7 +186,7 @@ body {
 }
 
 .mobile-frame {
-  width: 375px;
+  width: 750px;
   height: 667px;
   background: #000;
   border-radius: 24px;
@@ -148,12 +224,7 @@ body {
 
 @media (max-width: 768px) {
   .sidebar {
-    width: 240px;
-  }
-
-  .mobile-frame {
-    width: 320px;
-    height: 568px;
+    display: none;
   }
 }
 </style>

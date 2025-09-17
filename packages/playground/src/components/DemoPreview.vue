@@ -1,17 +1,22 @@
 <template>
   <div class="demo-preview">
-    <component :is="currentComponent" />
+    <component :is="currentComponent" :api-config="apiConfig" />
   </div>
 </template>
 
 <script setup lang="ts">
 import { computed } from 'vue';
 import ContentCardDemo from '../demos/ContentCardDemo.vue';
+import ImageUploaderDemo from '../demos/ImageUploaderDemo.vue';
+import OrganizationDemo from '../demos/OrganizationDemo.vue';
+import PullRefreshDemo from '../demos/PullRefreshDemo.vue';
 import StepsCardDemo from '../demos/StepsCardDemo.vue';
 import TabsDemo from '../demos/TabsDemo.vue';
+import UseRefreshListDemo from '../demos/UseRefreshListDemo.vue';
 
 interface Props {
   currentDemo: string;
+  apiConfig?: any;
 }
 
 const props = defineProps<Props>();
@@ -20,10 +25,10 @@ const demoComponents = {
   'tabs': TabsDemo,
   'content-card': ContentCardDemo,
   'steps-card': StepsCardDemo,
-  'organization': TabsDemo, // 临时使用
-  'image-uploader': TabsDemo, // 临时使用
-  'pull-refresh': TabsDemo, // 临时使用
-  'use-refresh-list': TabsDemo // 临时使用
+  'organization': OrganizationDemo,
+  'image-uploader': ImageUploaderDemo,
+  'pull-refresh': PullRefreshDemo,
+  'use-refresh-list': UseRefreshListDemo
 };
 
 const currentComponent = computed(() => {

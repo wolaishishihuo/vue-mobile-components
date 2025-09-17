@@ -44,7 +44,7 @@
 </template>
 
 <script lang="ts" setup>
-import type { Props } from './types';
+import type { PullToRefreshListProps } from './types';
 import { useRefreshList } from '@jname/core';
 import { List, PullRefresh } from 'vant';
 import { computed, onMounted } from 'vue';
@@ -53,7 +53,7 @@ defineOptions({
   name: 'JPullToRefreshList'
 });
 
-const props = withDefaults(defineProps<Props>(), {
+const props = withDefaults(defineProps<PullToRefreshListProps>(), {
   disablePullRefresh: false,
   extraParams: () => ({}),
   immediate: true

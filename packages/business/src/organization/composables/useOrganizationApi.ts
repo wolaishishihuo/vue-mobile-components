@@ -1,11 +1,11 @@
-import type { ApiConfig } from '../types';
+import type { OrganizationApiConfig } from '../types';
 import { ref } from 'vue';
 import { createOrganizationApi } from '../api';
 
 const useOrganizationApi = ({
   apiConfig
 }: {
-  apiConfig: ApiConfig;
+  apiConfig: OrganizationApiConfig;
 }) => {
   const api = createOrganizationApi(apiConfig);
   const organizationCatch = ref(new Map<string, true>());

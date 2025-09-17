@@ -1,9 +1,9 @@
-import type { ApiConfig, Organization, Personnel } from './types';
+import type { OrganizationApiConfig, OrganizationNode, OrganizationPersonnelItem } from './types';
 
 /**
  * 创建 API 实例
  */
-export const createOrganizationApi = (config: ApiConfig) => {
+export const createOrganizationApi = (config: OrganizationApiConfig) => {
   const { baseUrl, getToken } = config;
 
   // 通用fetch请求方法
@@ -61,22 +61,18 @@ export const createOrganizationApi = (config: ApiConfig) => {
   return {
     // 获取组织架构接口
     getOrganizations: () => {
-      return fetchData<Organization[]>('/sfzt/select/dept/topNodes');
+      return fetchData<OrganizationNode[]>('/sfzt/select/dept/topNodes');
     },
 
     // 获取人员列表接口
     getPersonnelList: (params: Record<string, any>) => {
-      return fetchData<{ list: Personnel[]; total: number }>('/sfzt/select/dept/user/list', params);
+      return fetchData<{ list: OrganizationPersonnelItem[]; total: number }>('/sfzt/select/dept/user/list', params);
     },
 
     // 获取组织架构子节点接口
     getOrganizationsSubNodes: (params: { dwh: string }) => {
-      return fetchData<Organization[]>('/sfzt/select/dept/subNodes', params);
-    },
-
-    // 测试 - 获取区域树
-    getAreaTree: () => {
-      return fetchData('/school/area/tree');
+      return fetchData<OrganizationNode[]>('/sfzt/select/dept/subNodes', params);
     }
+
   };
 };
