@@ -70,6 +70,11 @@ pnpm lint:fix        # 修复代码格式问题
 
 # 清理
 pnpm clean           # 清理所有构建产物
+
+# 部署相关
+pnpm --filter playground preview  # 本地预览构建结果
+vercel                            # Vercel 预览部署
+vercel --prod                     # Vercel 生产部署
 ```
 
 ### 版本发布
@@ -203,12 +208,32 @@ pnpm --filter @jname/business release
 - 通过 `@jname/package-name` 导入
 - 构建时自动解析依赖关系
 
-### 发布流程
+### NPM 包发布流程
 1. 开发完成，确保所有检查通过
 2. 运行 `pnpm changeset` 创建变更记录
 3. 运行 `pnpm version-packages` 更新版本
 4. 运行 `pnpm build` 构建所有包
 5. 运行 `pnpm publish-packages` 发布
+
+### Playground 部署流程
+```bash
+# 本地预览
+pnpm --filter playground build
+pnpm --filter playground preview
+
+# Vercel 部署
+vercel                    # 预览部署
+vercel --prod            # 生产部署
+
+# 或通过 Git 自动部署
+git push origin main     # 推送到 main 分支自动触发部署
+```
+
+#### Vercel 配置说明
+- **根目录 vercel.json**: 整个项目的部署配置
+- **playground/vercel.json**: playground 专用配置
+- **构建优化**: 只构建 playground，Vite 自动处理依赖打包
+- **静态资源**: `/assets/*` 路径专门处理静态文件
 
 ## 🌟 特色功能
 
@@ -223,6 +248,8 @@ pnpm --filter @jname/business release
 - **类型安全**: 完整的 TypeScript 支持
 - **代码规范**: 统一的 ESLint 和 Prettier 配置
 - **构建优化**: 基于 Vite 的快速构建
+- **自动部署**: Git 推送自动触发 Vercel 部署
+- **预览部署**: 每个 PR 都有独立的预览地址
 
 ## 📖 使用指南
 
