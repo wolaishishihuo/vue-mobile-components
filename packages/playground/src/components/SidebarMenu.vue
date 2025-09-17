@@ -3,7 +3,7 @@
     <!-- 基础组件 -->
     <div class="menu-group">
       <div class="group-title">
-        基础组件 (不含vant组件)
+        基础组件
       </div>
       <div
         v-for="item in basicComponents"
