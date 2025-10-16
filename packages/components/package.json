@@ -1,6 +1,6 @@
 {
   "name": "@jname/components",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Vue Mobile Components - Basic UI components",
   "author": "Jname",
   "license": "MIT",
@@ -31,7 +31,7 @@
     "vue": "^3.3.0"
   },
   "dependencies": {
-    "@jname/core": "^1.0.0"
+    "@jname/core": "^1.0.1"
   },
   "devDependencies": {},
   "publishConfig": {
