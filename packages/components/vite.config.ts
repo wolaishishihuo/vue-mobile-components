@@ -8,7 +8,9 @@ export default defineConfig({
     vue(),
     dts({
       include: ['**/*.ts', '**/*.vue'],
-      exclude: ['**/*.test.ts', '**/*.spec.ts', '**/demo/**']
+      exclude: ['**/*.test.ts', '**/*.spec.ts', '**/demo/**'],
+      outDir: 'dist',
+      entryRoot: './'
     })
   ],
   css: {
