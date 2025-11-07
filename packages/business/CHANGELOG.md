@@ -1,5 +1,11 @@
 # @jname/business
 
+## 1.0.4
+
+### Patch Changes
+
+- feat(organization): add clear event handler to search input for better user experience
+
 ## 1.0.3
 
 ### Patch Changes
