@@ -51,7 +51,6 @@
           placeholder="请输入姓名搜索"
           clearable
           @search="executeSearch"
-          @clear="executeSearch"
         />
       </div>
 
