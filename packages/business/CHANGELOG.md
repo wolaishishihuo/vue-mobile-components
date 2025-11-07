@@ -1,5 +1,11 @@
 # @jname/business
 
+## 1.0.3
+
+### Patch Changes
+
+- fix: remove redundant clear event handler from search input in organization component
+
 ## 1.0.2
 
 ### Patch Changes
