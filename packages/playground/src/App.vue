@@ -69,8 +69,8 @@ const currentDemo = ref('tabs');
 
 // API 配置状态
 const apiConfig = reactive({
-  baseUrl: 'https://dev.psctech.net:18100/electronicscreen/api',
-  token: ''
+  baseUrl: 'https://dev.psctech.net:18100/cadre/api',
+  token: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJsb2dpblR5cGUiOiJsb2dpbiIsImxvZ2luSWQiOiJqIiwiZGV2aWNlIjoiZGVmYXVsdC1kZXZpY2UiLCJlZmYiOjE3NjI0OTk5NDk5NjksInJuU3RyIjoiTjBBWVc5UEVNaTFKOFVHOXVLRjBRUE1hRlVZZWpSQ0QiLCJ1c2VyTmFtZSI6Iui0vuW_l-WImiIsImF2YXRhciI6Imh0dHBzOi8vZGV2LnBzY3RlY2gubmV0OjE4MDAzL29iLWFwaS9maWxlL3N0YXRpY3MvMjAyNS8wNy8xOC8zZTdkMjY1OS05YzljLTRlYWEtYTIzNS02NWFjMzkwODExZWEucG5nIiwiZGVwYXJ0bWVudElkcyI6Ind3ODUyMTQxODU3MGY1NTZmYjEiLCJkZXBhcnRtZW50TmFtZSI6IuS8oOe-jumbhuWIm-Wkp-WtpiJ9.s-1U-lWBihk222ecysLLVetCIw61xq_YpFCMOCMm1co'
 });
 
 // 检查 API 配置是否有效
