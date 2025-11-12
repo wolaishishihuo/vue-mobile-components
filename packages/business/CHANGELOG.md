@@ -1,5 +1,11 @@
 # @jname/business
 
+## 1.0.5
+
+### Patch Changes
+
+- 为 organization 组件的搜索输入框添加清除事件处理器,优化用户交互体验
+
 ## 1.0.4
 
 ### Patch Changes
